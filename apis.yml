@@ -1,10 +1,9 @@
 aid: smartrecruiters
 name: SmartRecruiters
 description: >-
-  The Assessment API allows our customers to order the assessment services that
-  are available through our marketplace and allows you, our partners, to
-  interface with the SmartRecruiters marketplace to provide and manage those
-  services. 
+  The Assessment API allows our customers to order the assessment services that are
+  available through our marketplace and allows you, our partners, to interface with
+  the SmartRecruiters marketplace to provide and manage those services.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -20,10 +19,9 @@ apis:
   - aid: smartrecruiters:smartrecruiters
     name: SmartRecruiters
     description: >-
-      The Assessment API allows our customers to order the assessment services
-      that are available through our marketplace and allows you, our partners,
-      to interface with the SmartRecruiters marketplace to provide and manage
-      those services. 
+      The Assessment API allows our customers to order the assessment services that
+      are available through our marketplace and allows you, our partners, to interface
+      with the SmartRecruiters marketplace to provide and manage those services.
     humanURL: ' https://developers.smartrecruiters.com/docs/partners-assessment-api'
     tags:
       - API
