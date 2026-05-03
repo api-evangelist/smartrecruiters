@@ -1,0 +1,42 @@
+{
+  "title": "SmartRecruiters Job Structure",
+  "description": "JSON structure documentation for a SmartRecruiters job object",
+  "type": "object",
+  "fields": [
+    {"name": "id", "type": "string", "required": true, "description": "Unique job identifier"},
+    {"name": "title", "type": "string", "required": true, "description": "Job title"},
+    {"name": "refNumber", "type": "string", "required": false, "description": "External reference number"},
+    {"name": "status", "type": "enum", "required": true, "values": ["CREATED", "SOURCING", "INTERVIEW", "OFFER", "HIRED", "CANCELLED"], "description": "Job hiring status"},
+    {"name": "department", "type": "object", "required": false, "fields": [
+      {"name": "id", "type": "string"},
+      {"name": "label", "type": "string"}
+    ]},
+    {"name": "location", "type": "object", "required": false, "fields": [
+      {"name": "id", "type": "string"},
+      {"name": "city", "type": "string"},
+      {"name": "country", "type": "string"},
+      {"name": "region", "type": "string"},
+      {"name": "remote", "type": "boolean"}
+    ]},
+    {"name": "industry", "type": "object", "required": false, "fields": [
+      {"name": "id", "type": "string"},
+      {"name": "label", "type": "string"}
+    ]},
+    {"name": "function", "type": "object", "required": false, "fields": [
+      {"name": "id", "type": "string"},
+      {"name": "label", "type": "string"}
+    ]},
+    {"name": "experienceLevel", "type": "object", "required": false, "fields": [
+      {"name": "id", "type": "string"},
+      {"name": "label", "type": "string"}
+    ]},
+    {"name": "typeOfEmployment", "type": "object", "required": false, "fields": [
+      {"name": "id", "type": "string"},
+      {"name": "label", "type": "string"}
+    ]},
+    {"name": "numberOfOpenings", "type": "integer", "required": false, "description": "Number of positions to fill"},
+    {"name": "hiringTeam", "type": "object", "required": false, "description": "Team members in hiring process"},
+    {"name": "createdOn", "type": "datetime", "required": false},
+    {"name": "updatedOn", "type": "datetime", "required": false}
+  ]
+}

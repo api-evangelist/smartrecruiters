@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.smartrecruiters.com/schemas/job",
+  "title": "SmartRecruiters Job",
+  "description": "A job opening in the SmartRecruiters talent acquisition platform",
+  "type": "object",
+  "required": ["id", "title", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique job identifier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Job title"
+    },
+    "refNumber": {
+      "type": "string",
+      "description": "External reference number for the job"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["CREATED", "SOURCING", "INTERVIEW", "OFFER", "HIRED", "CANCELLED"],
+      "description": "Current status of the job in the hiring workflow"
+    },
+    "department": {
+      "type": "object",
+      "description": "Department the job belongs to",
+      "properties": {
+        "id": {"type": "string"},
+        "label": {"type": "string"}
+      }
+    },
+    "location": {
+      "type": "object",
+      "description": "Job location details",
+      "properties": {
+        "id": {"type": "string"},
+        "city": {"type": "string"},
+        "country": {"type": "string"},
+        "region": {"type": "string"},
+        "remote": {"type": "boolean"}
+      }
+    },
+    "industry": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string"},
+        "label": {"type": "string"}
+      }
+    },
+    "function": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string"},
+        "label": {"type": "string"}
+      }
+    },
+    "experienceLevel": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string"},
+        "label": {"type": "string"}
+      }
+    },
+    "typeOfEmployment": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string"},
+        "label": {"type": "string"}
+      }
+    },
+    "numberOfOpenings": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of positions to fill"
+    },
+    "hiringTeam": {
+      "type": "object",
+      "description": "Team members involved in the hiring process",
+      "properties": {
+        "jobOwner": {"$ref": "#/definitions/TeamMember"},
+        "hiringManagers": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/TeamMember"}
+        },
+        "recruiters": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/TeamMember"}
+        }
+      }
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the job was created"
+    },
+    "updatedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the job was last updated"
+    }
+  },
+  "definitions": {
+    "TeamMember": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "email": {"type": "string", "format": "email"}
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+vocabulary:
+  name: SmartRecruiters Vocabulary
+  description: >-
+    Domain vocabulary for the SmartRecruiters talent acquisition platform,
+    covering key terms, concepts, statuses, and taxonomies used across all APIs.
+  version: "1.0.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  tags:
+    - Human Resources
+    - Recruiting
+    - Talent Acquisition
+
+terms:
+  - term: Posting
+    definition: >-
+      A public-facing job advertisement published on a career site. Contains
+      the job description, requirements, location, and application link.
+    synonyms: [job listing, job ad, vacancy]
+
+  - term: Job
+    definition: >-
+      An internal job record representing a hiring need within an organization.
+      Jobs go through a defined lifecycle from creation through hire.
+    synonyms: [position, opening, requisition]
+
+  - term: Candidate
+    definition: >-
+      A person who has applied for or is being considered for one or more jobs
+      within the SmartRecruiters platform.
+    synonyms: [applicant, prospect, talent]
+
+  - term: Application
+    definition: >-
+      A candidate's formal submission of interest for a specific job posting,
+      including their profile, answers to screening questions, and documents.
+    synonyms: [submission, candidacy]
+
+  - term: Hiring Team
+    definition: >-
+      The group of users assigned to a job, including the job owner, hiring
+      managers, recruiters, and coordinators.
+    synonyms: [recruiting team]
+
+  - term: Company Identifier
+    definition: >-
+      A unique slug that identifies a company in SmartRecruiters, appearing
+      at the end of the default career site URL.
+    synonyms: [company slug, employer ID]
+
+  - term: Assessment
+    definition: >-
+      A third-party evaluation or test ordered through the SmartRecruiters
+      Marketplace to evaluate a candidate's skills or fit.
+    synonyms: [evaluation, test, screening]
+
+  - term: Marketplace
+    definition: >-
+      The SmartRecruiters ecosystem of partner integrations including job boards,
+      assessment providers, background check vendors, and other HR tech tools.
+    synonyms: [app store, partner network]
+
+statuses:
+  job:
+    - status: CREATED
+      description: Job has been created but not yet open for sourcing
+    - status: SOURCING
+      description: Active sourcing phase - recruiting candidates
+    - status: INTERVIEW
+      description: Candidates are being interviewed
+    - status: OFFER
+      description: Offer has been extended to a candidate
+    - status: HIRED
+      description: Position has been filled
+    - status: CANCELLED
+      description: Job has been cancelled
+
+  application:
+    - status: IN_PROGRESS
+      description: Application is being reviewed
+    - status: REJECTED
+      description: Candidate was not selected for this position
+    - status: OFFERED
+      description: An offer has been extended to the candidate
+    - status: HIRED
+      description: Candidate accepted an offer and is being onboarded
+
+  consent:
+    - status: PENDING
+      description: GDPR consent has been requested but not yet given
+    - status: GIVEN
+      description: Candidate has provided GDPR consent
+    - status: WITHDRAWN
+      description: Candidate has withdrawn GDPR consent
+
+authentication:
+  - method: API Key
+    description: >-
+      X-SmartToken header with an API key generated in the SmartRecruiters admin
+      interface. Used for single-organization custom integrations.
+  - method: OAuth 2.0 Authorization Code
+    description: >-
+      For Marketplace apps serving multiple SmartRecruiters customers. Requires
+      app approval and uses the standard OAuth 2.0 authorization code flow.
+  - method: OAuth 2.0 Client Credentials
+    description: >-
+      For server-to-server integrations where a user is not present in the flow.
+
+rate_limits:
+  - limit: 10 requests/second per user (standard)
+  - limit: 2 requests/second for job publication
+  - limit: 8 concurrent requests maximum
+  - limit: 1 concurrent request for Analytics API
+
+common_patterns:
+  pagination:
+    description: All list endpoints use limit/offset pagination
+    params: [limit, offset, totalFound]
+  list_result:
+    description: All list responses are wrapped in a ListResult object
+    fields: [limit, offset, totalFound, content]

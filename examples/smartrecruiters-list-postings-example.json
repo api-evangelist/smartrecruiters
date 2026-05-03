@@ -1,0 +1,63 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.smartrecruiters.com/v1/companies/acme-corp/postings",
+    "headers": {
+      "X-SmartToken": "your-api-key-here"
+    },
+    "parameters": {
+      "q": "software engineer",
+      "limit": 10,
+      "offset": 0,
+      "department": "Engineering"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "limit": 10,
+      "offset": 0,
+      "totalFound": 3,
+      "content": [
+        {
+          "id": "post-001",
+          "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "title": "Senior Software Engineer",
+          "department": {
+            "id": "dept-eng",
+            "label": "Engineering"
+          },
+          "location": {
+            "country": "United States",
+            "countryCode": "US",
+            "region": "California",
+            "city": "San Francisco",
+            "remote": true
+          },
+          "releasedDate": "2026-04-01T00:00:00.000Z",
+          "applyUrl": "https://jobs.smartrecruiters.com/AcmeCorp/acme-corp-senior-software-engineer",
+          "industry": {
+            "id": "ind-tech",
+            "label": "Internet/New Media"
+          },
+          "function": {
+            "id": "func-eng",
+            "label": "Information Technology"
+          },
+          "experienceLevel": {
+            "id": "exp-senior",
+            "label": "Senior"
+          },
+          "employmentType": {
+            "id": "emp-full",
+            "label": "Full-time"
+          },
+          "company": {
+            "identifier": "acme-corp",
+            "name": "Acme Corporation"
+          }
+        }
+      ]
+    }
+  }
+}

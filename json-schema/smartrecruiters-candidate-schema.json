@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.smartrecruiters.com/schemas/candidate",
+  "title": "SmartRecruiters Candidate",
+  "description": "A candidate profile in the SmartRecruiters talent acquisition platform",
+  "type": "object",
+  "required": ["id", "firstName", "lastName", "email"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique candidate identifier"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Candidate first name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Candidate last name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Candidate email address"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "Candidate phone number"
+    },
+    "location": {
+      "type": "object",
+      "description": "Candidate location",
+      "properties": {
+        "city": {"type": "string"},
+        "country": {"type": "string"},
+        "countryCode": {"type": "string"}
+      }
+    },
+    "web": {
+      "type": "object",
+      "description": "Candidate web presence",
+      "properties": {
+        "linkedIn": {"type": "string", "format": "uri"},
+        "facebook": {"type": "string", "format": "uri"},
+        "portfolio": {"type": "string", "format": "uri"}
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Tags for categorizing the candidate"
+    },
+    "sourceDetails": {
+      "type": "object",
+      "description": "How the candidate was sourced",
+      "properties": {
+        "type": {"type": "string"},
+        "subtype": {"type": "string"},
+        "refId": {"type": "string"}
+      }
+    },
+    "consent": {
+      "type": "object",
+      "description": "GDPR consent status",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "GIVEN", "WITHDRAWN"]
+        },
+        "createdOn": {"type": "string", "format": "date-time"},
+        "expirationDate": {"type": "string", "format": "date"}
+      }
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedOn": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

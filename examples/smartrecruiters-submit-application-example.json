@@ -1,0 +1,43 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.smartrecruiters.com/v1/companies/acme-corp/postings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/candidates",
+    "headers": {
+      "X-SmartToken": "your-api-key-here",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "phone": "+1-555-123-4567",
+      "location": {
+        "country": "US",
+        "city": "San Francisco"
+      },
+      "web": {
+        "linkedIn": "https://linkedin.com/in/janesmith",
+        "portfolio": "https://janesmith.dev"
+      },
+      "answers": [
+        {
+          "id": "q-001",
+          "answer": "5 years"
+        },
+        {
+          "id": "q-002",
+          "answer": true
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "app-xyz-001",
+      "candidateId": "cand-abc-123",
+      "postingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "status": "IN_PROGRESS"
+    }
+  }
+}

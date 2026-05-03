@@ -1,41 +1,58 @@
-# SmartRecruiters (smartrecruiters)
-The Assessment API allows our customers to order the assessment services that are available through our marketplace and allows you, our partners, to interface with the SmartRecruiters marketplace to provide and manage those services. 
+# SmartRecruiters
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/smartrecruiters/refs/heads/main/apis.yml)
-
-## Scope
-
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
-
-## Tags:
-
- - API
-
-## Timestamps
-
-- **Created:** 2025-01-07 
-- **Modified:** 2026-03-16 
+SmartRecruiters is a talent acquisition platform providing a comprehensive suite of REST APIs for recruiting, hiring, and workforce management. The platform enables organizations to manage job postings, candidate applications, assessments, interviews, and offers through a unified API ecosystem.
 
 ## APIs
 
-### SmartRecruiters
-The Assessment API allows our customers to order the assessment services that are available through our marketplace and allows you, our partners, to interface with the SmartRecruiters marketplace to provide and manage those services. 
+| API | Description |
+|-----|-------------|
+| [Posting API](openapi/smartrecruiters-posting-openapi.yml) | Public job postings for career sites and application submission |
+| [Job API](openapi/smartrecruiters-jobs-openapi.yml) | Internal job lifecycle management from creation through hire |
+| [Candidate API](openapi/smartrecruiters-candidates-openapi.yml) | Candidate profile management, import, and tracking |
 
-**Human URL:** [ https://developers.smartrecruiters.com/docs/partners-assessment-api]( https://developers.smartrecruiters.com/docs/partners-assessment-api)
+## Artifacts
 
+### OpenAPI Specifications
+- [smartrecruiters-posting-openapi.yml](openapi/smartrecruiters-posting-openapi.yml) — Posting API (career sites, applications)
+- [smartrecruiters-jobs-openapi.yml](openapi/smartrecruiters-jobs-openapi.yml) — Job API (job lifecycle management)
+- [smartrecruiters-candidates-openapi.yml](openapi/smartrecruiters-candidates-openapi.yml) — Candidate API (profile management)
 
-#### Tags:
+### Capabilities
+- [talent-acquisition.yaml](capabilities/talent-acquisition.yaml) — Unified talent acquisition workflow (jobs + candidates + postings)
 
- - API
+#### Shared Definitions
+- [capabilities/shared/posting-api.yaml](capabilities/shared/posting-api.yaml) — Posting API capability
+- [capabilities/shared/jobs-api.yaml](capabilities/shared/jobs-api.yaml) — Job API capability
+- [capabilities/shared/candidates-api.yaml](capabilities/shared/candidates-api.yaml) — Candidate API capability
 
-#### Properties
+### Rules
+- [smartrecruiters-rules.yml](rules/smartrecruiters-rules.yml) — Spectral ruleset for SmartRecruiters API conventions
 
-- [Documentation]( https://developers.smartrecruiters.com/docs/partners-assessment-api)
+### JSON Schema
+- [smartrecruiters-job-schema.json](json-schema/smartrecruiters-job-schema.json) — Job entity schema
+- [smartrecruiters-candidate-schema.json](json-schema/smartrecruiters-candidate-schema.json) — Candidate entity schema
 
-## Maintainers
+### JSON Structure
+- [smartrecruiters-job-structure.json](json-structure/smartrecruiters-job-structure.json) — Job object structure documentation
 
-**FN:** Kin Lane
+### JSON-LD
+- [smartrecruiters-context.jsonld](json-ld/smartrecruiters-context.jsonld) — Linked data context mapping to schema.org
 
-**Email:** kin@apievangelist.com
+### Examples
+- [smartrecruiters-list-postings-example.json](examples/smartrecruiters-list-postings-example.json) — List job postings request/response
+- [smartrecruiters-submit-application-example.json](examples/smartrecruiters-submit-application-example.json) — Submit application request/response
+
+### Vocabulary
+- [smartrecruiters-vocabulary.yml](vocabulary/smartrecruiters-vocabulary.yml) — Domain vocabulary, statuses, and conventions
+
+## Authentication
+
+- **API Key** — `X-SmartToken` header for single-org integrations
+- **OAuth 2.0** — Authorization Code and Client Credentials for multi-tenant Marketplace apps
+
+## Developer Resources
+
+- [Developer Portal](https://developers.smartrecruiters.com/)
+- [API Platform Overview](https://developers.smartrecruiters.com/docs/the-smartrecruiters-platform)
+- [GitHub Organization](https://github.com/smartrecruiters)
+- [Marketplace](https://www.smartrecruiters.com/marketplace/)
