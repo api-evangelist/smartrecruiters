@@ -1,0 +1,186 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: SmartRecruiters
+providerId: smartrecruiters
+publisherName: SmartRecruiters
+serviceCategory: API
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - Human Resources
+  - Recruiting
+  - Talent Acquisition
+  - Applicant Tracking
+  - HR Technology
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the SmartRecruiters API surface. Provides a FOCUS-aligned
+  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams in near
+      real-time.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming team, environment, application, and
+      feature so cost can be allocated.
+  - name: Optimization
+    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
+      cost per useful unit of work.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each consuming team.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: SmartRecruiters
+  ServiceCategory: Developer Tools / API
+  ProviderName: SmartRecruiters
+  PublisherName: SmartRecruiters
+  InvoiceIssuerName: SmartRecruiters
+  PricingCategory: Usage-Based
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of billable API requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - region
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - region
+      - consumer
+  - name: compute_seconds
+    description: Server-side compute consumed by the request, where applicable
+    unit: second
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+apis:
+  - name: SmartRecruiters Posting API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Jobs
+      - Postings
+      - Career Sites
+    serviceName: SmartRecruiters Posting API
+    serviceCategory: API
+  - name: SmartRecruiters Job API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Jobs
+      - Hiring
+    serviceName: SmartRecruiters Job API
+    serviceCategory: API
+  - name: SmartRecruiters Candidate API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Candidates
+      - Applicants
+      - Talent
+    serviceName: SmartRecruiters Candidate API
+    serviceCategory: API
+  - name: SmartRecruiters Application API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Applications
+      - Candidates
+      - Screening
+    serviceName: SmartRecruiters Application API
+    serviceCategory: API
+  - name: SmartRecruiters Assessment API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Assessments
+      - Marketplace
+      - Partners
+    serviceName: SmartRecruiters Assessment API
+    serviceCategory: API
+  - name: SmartRecruiters Interview API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Interviews
+      - Scheduling
+    serviceName: SmartRecruiters Interview API
+    serviceCategory: API
+  - name: SmartRecruiters Reporting API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Reporting
+      - Analytics
+      - Data Export
+    serviceName: SmartRecruiters Reporting API
+    serviceCategory: API
+  - name: SmartRecruiters Job Board API
+    baseURL: https://api.smartrecruiters.com
+    tags:
+      - Job Boards
+      - Partners
+      - Jobs
+    serviceName: SmartRecruiters Job Board API
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
