@@ -1,350 +1,783 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
   label: SmartRecruiters Talent Acquisition
-  description: >-
-    Unified workflow for end-to-end talent acquisition combining job management,
-    candidate tracking, and application processing. Used by recruiters and hiring
-    managers to manage the full recruiting lifecycle from job creation through hire.
+  description: Unified workflow for end-to-end talent acquisition combining job management, candidate tracking, and application
+    processing. Used by recruiters and hiring managers to manage the full recruiting lifecycle from job creation through hire.
   tags:
-    - SmartRecruiters
-    - Talent Acquisition
-    - Recruiting
-    - Human Resources
-    - Jobs
-    - Candidates
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - SmartRecruiters
+  - Talent Acquisition
+  - Recruiting
+  - Human Resources
+  - Jobs
+  - Candidates
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      SMARTRECRUITERS_API_KEY: SMARTRECRUITERS_API_KEY
-
+- namespace: env
+  keys:
+    SMARTRECRUITERS_API_KEY: SMARTRECRUITERS_API_KEY
 capability:
   consumes:
-    - import: smartrecruiters-jobs
-      location: ./shared/jobs-api.yaml
-    - import: smartrecruiters-candidates
-      location: ./shared/candidates-api.yaml
-    - import: smartrecruiters-posting
-      location: ./shared/posting-api.yaml
-
+  - type: http
+    namespace: smartrecruiters-jobs
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Job API for job lifecycle management
+    authentication:
+      type: apikey
+      key: X-SmartToken
+      value: '{{SMARTRECRUITERS_API_KEY}}'
+      placement: header
+    resources:
+    - name: jobs
+      path: /jobs
+      description: Job management
+      operations:
+      - name: list-jobs
+        method: GET
+        description: List jobs with optional filtering
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          required: false
+          description: Search query
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by job status
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-job
+        method: POST
+        description: Create a new job opening
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            title: '{{tools.title}}'
+            department: '{{tools.department}}'
+            location: '{{tools.location}}'
+    - name: job
+      path: /jobs/{jobId}
+      description: Single job management
+      operations:
+      - name: get-job
+        method: GET
+        description: Get details for a specific job
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          required: true
+          description: The job ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-job
+        method: PATCH
+        description: Update properties of a job
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          required: true
+          description: The job ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            title: '{{tools.title}}'
+    - name: job-status
+      path: /jobs/{jobId}/status
+      description: Job status management
+      operations:
+      - name: update-job-status
+        method: PUT
+        description: Update the status of a job
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          required: true
+          description: The job ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            status: '{{tools.status}}'
+    - name: job-hiring-team
+      path: /jobs/{jobId}/hiring-team
+      description: Job hiring team management
+      operations:
+      - name: get-job-hiring-team
+        method: GET
+        description: Get the hiring team for a job
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          required: true
+          description: The job ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-candidates
+      path: /jobs/{jobId}/candidates
+      description: Candidates for a specific job
+      operations:
+      - name: list-job-candidates
+        method: GET
+        description: List candidates who applied to a job
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          required: true
+          description: The job ID
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by candidate status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: smartrecruiters-candidates
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Candidate API for candidate profile management
+    authentication:
+      type: apikey
+      key: X-SmartToken
+      value: '{{SMARTRECRUITERS_API_KEY}}'
+      placement: header
+    resources:
+    - name: candidates
+      path: /candidates
+      description: Candidate profile management
+      operations:
+      - name: list-candidates
+        method: GET
+        description: List candidates with optional filtering
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          required: false
+          description: Search by name or email
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-candidate
+        method: POST
+        description: Import a new candidate profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            firstName: '{{tools.firstName}}'
+            lastName: '{{tools.lastName}}'
+            email: '{{tools.email}}'
+    - name: candidate
+      path: /candidates/{candidateId}
+      description: Individual candidate management
+      operations:
+      - name: get-candidate
+        method: GET
+        description: Get a candidate profile
+        inputParameters:
+        - name: candidateId
+          in: path
+          type: string
+          required: true
+          description: The candidate ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-candidate
+        method: PATCH
+        description: Update candidate profile properties
+        inputParameters:
+        - name: candidateId
+          in: path
+          type: string
+          required: true
+          description: The candidate ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            firstName: '{{tools.firstName}}'
+            lastName: '{{tools.lastName}}'
+    - name: candidate-applications
+      path: /candidates/{candidateId}/applications
+      description: Candidate application history
+      operations:
+      - name: list-candidate-applications
+        method: GET
+        description: List all applications for a candidate
+        inputParameters:
+        - name: candidateId
+          in: path
+          type: string
+          required: true
+          description: The candidate ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: candidate-messages
+      path: /candidates/{candidateId}/messages
+      description: Candidate notes and messages
+      operations:
+      - name: list-candidate-messages
+        method: GET
+        description: List notes and messages for a candidate
+        inputParameters:
+        - name: candidateId
+          in: path
+          type: string
+          required: true
+          description: The candidate ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-candidate-message
+        method: POST
+        description: Add a note or message to a candidate profile
+        inputParameters:
+        - name: candidateId
+          in: path
+          type: string
+          required: true
+          description: The candidate ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            message: '{{tools.message}}'
+    - name: candidate-documents
+      path: /candidates/{candidateId}/documents
+      description: Candidate document attachments
+      operations:
+      - name: list-candidate-documents
+        method: GET
+        description: List documents attached to a candidate
+        inputParameters:
+        - name: candidateId
+          in: path
+          type: string
+          required: true
+          description: The candidate ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: smartrecruiters-posting
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Posting API for career site and application management
+    authentication:
+      type: apikey
+      key: X-SmartToken
+      value: '{{SMARTRECRUITERS_API_KEY}}'
+      placement: header
+    resources:
+    - name: postings
+      path: /v1/companies/{companyIdentifier}/postings
+      description: Job postings management
+      operations:
+      - name: list-postings
+        method: GET
+        description: List active job postings for a company
+        inputParameters:
+        - name: companyIdentifier
+          in: path
+          type: string
+          required: true
+          description: The company identifier
+        - name: q
+          in: query
+          type: string
+          required: false
+          description: Full-text search query
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results to return
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Results to skip for pagination
+        - name: country
+          in: query
+          type: string
+          required: false
+          description: Filter by country code
+        - name: department
+          in: query
+          type: string
+          required: false
+          description: Filter by department
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-posting
+        method: GET
+        description: Get detailed information for a specific job posting
+        inputParameters:
+        - name: companyIdentifier
+          in: path
+          type: string
+          required: true
+          description: The company identifier
+        - name: postingId
+          in: path
+          type: string
+          required: true
+          description: The posting ID or UUID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications
+      path: /v1/companies/{companyIdentifier}/postings/{postingId}/candidates
+      description: Candidate application submission
+      operations:
+      - name: submit-application
+        method: POST
+        description: Submit a new candidate application for a job posting
+        inputParameters:
+        - name: companyIdentifier
+          in: path
+          type: string
+          required: true
+          description: The company identifier
+        - name: postingId
+          in: path
+          type: string
+          required: true
+          description: The posting ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            firstName: '{{tools.firstName}}'
+            lastName: '{{tools.lastName}}'
+            email: '{{tools.email}}'
+    - name: application-status
+      path: /v1/companies/{companyIdentifier}/postings/{postingId}/candidates/{candidateId}/status
+      description: Application status tracking
+      operations:
+      - name: get-application-status
+        method: GET
+        description: Get the application status for a specific candidate
+        inputParameters:
+        - name: companyIdentifier
+          in: path
+          type: string
+          required: true
+          description: The company identifier
+        - name: postingId
+          in: path
+          type: string
+          required: true
+          description: The posting ID
+        - name: candidateId
+          in: path
+          type: string
+          required: true
+          description: The candidate ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: talent-acquisition-api
-      description: Unified REST API for end-to-end talent acquisition workflows.
-      resources:
-        - path: /v1/jobs
-          name: jobs
-          description: Job lifecycle management
-          operations:
-            - method: GET
-              name: list-jobs
-              description: List all jobs with optional filters
-              call: "smartrecruiters-jobs.list-jobs"
-              with:
-                q: "rest.q"
-                status: "rest.status"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-job
-              description: Create a new job opening
-              call: "smartrecruiters-jobs.create-job"
-              with:
-                title: "rest.title"
-                department: "rest.department"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/jobs/{jobId}
-          name: job
-          description: Individual job management
-          operations:
-            - method: GET
-              name: get-job
-              description: Get job details
-              call: "smartrecruiters-jobs.get-job"
-              with:
-                jobId: "rest.jobId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/jobs/{jobId}/candidates
-          name: job-candidates
-          description: Candidates for a job
-          operations:
-            - method: GET
-              name: list-job-candidates
-              description: List candidates for a job
-              call: "smartrecruiters-jobs.list-job-candidates"
-              with:
-                jobId: "rest.jobId"
-                status: "rest.status"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/postings
-          name: postings
-          description: Public job postings for career sites
-          operations:
-            - method: GET
-              name: list-postings
-              description: List public job postings
-              call: "smartrecruiters-posting.list-postings"
-              with:
-                companyIdentifier: "rest.companyIdentifier"
-                q: "rest.q"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/postings/{postingId}
-          name: posting
-          description: Individual public job posting
-          operations:
-            - method: GET
-              name: get-posting
-              description: Get a specific job posting
-              call: "smartrecruiters-posting.get-posting"
-              with:
-                companyIdentifier: "rest.companyIdentifier"
-                postingId: "rest.postingId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/postings/{postingId}/applications
-          name: applications
-          description: Candidate application submission
-          operations:
-            - method: POST
-              name: submit-application
-              description: Submit a job application
-              call: "smartrecruiters-posting.submit-application"
-              with:
-                companyIdentifier: "rest.companyIdentifier"
-                postingId: "rest.postingId"
-                firstName: "rest.firstName"
-                lastName: "rest.lastName"
-                email: "rest.email"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/candidates
-          name: candidates
-          description: Candidate profile management
-          operations:
-            - method: GET
-              name: list-candidates
-              description: List candidate profiles
-              call: "smartrecruiters-candidates.list-candidates"
-              with:
-                q: "rest.q"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/candidates/{candidateId}
-          name: candidate
-          description: Individual candidate profile
-          operations:
-            - method: GET
-              name: get-candidate
-              description: Get a candidate profile
-              call: "smartrecruiters-candidates.get-candidate"
-              with:
-                candidateId: "rest.candidateId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9080
-      namespace: talent-acquisition-mcp
-      transport: http
-      description: MCP server for AI-assisted talent acquisition and recruiting workflows.
-      tools:
-        - name: list-jobs
-          description: List open positions with optional filtering by status or keyword
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-jobs.list-jobs"
-          with:
-            q: "tools.q"
-            status: "tools.status"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-job
-          description: Get detailed information about a specific job opening
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-jobs.get-job"
-          with:
-            jobId: "tools.jobId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-job
-          description: Create a new job opening in SmartRecruiters
-          hints:
-            readOnly: false
-            destructive: false
-          call: "smartrecruiters-jobs.create-job"
-          with:
-            title: "tools.title"
-            department: "tools.department"
-            location: "tools.location"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-job-status
-          description: Move a job to a new status in the hiring workflow
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "smartrecruiters-jobs.update-job-status"
-          with:
-            jobId: "tools.jobId"
-            status: "tools.status"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-job-hiring-team
-          description: Get the recruiting team assigned to a job
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-jobs.get-job-hiring-team"
-          with:
-            jobId: "tools.jobId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-job-candidates
-          description: List candidates who applied for a specific job
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-jobs.list-job-candidates"
-          with:
-            jobId: "tools.jobId"
-            status: "tools.status"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-postings
-          description: Browse public job postings on the career site
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-posting.list-postings"
-          with:
-            companyIdentifier: "tools.companyIdentifier"
-            q: "tools.q"
-            country: "tools.country"
-            department: "tools.department"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-posting
-          description: Get the full details of a public job posting
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-posting.get-posting"
-          with:
-            companyIdentifier: "tools.companyIdentifier"
-            postingId: "tools.postingId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: submit-application
-          description: Submit a candidate application for a job posting
-          hints:
-            readOnly: false
-            destructive: false
-          call: "smartrecruiters-posting.submit-application"
-          with:
-            companyIdentifier: "tools.companyIdentifier"
-            postingId: "tools.postingId"
-            firstName: "tools.firstName"
-            lastName: "tools.lastName"
-            email: "tools.email"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-application-status
-          description: Check the current status of a candidate's application
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-posting.get-application-status"
-          with:
-            companyIdentifier: "tools.companyIdentifier"
-            postingId: "tools.postingId"
-            candidateId: "tools.candidateId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-candidates
-          description: Search and list candidate profiles in the system
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-candidates.list-candidates"
-          with:
-            q: "tools.q"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-candidate
-          description: Get a candidate's full profile including contact info and history
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-candidates.get-candidate"
-          with:
-            candidateId: "tools.candidateId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-candidate
-          description: Import a new candidate profile into SmartRecruiters
-          hints:
-            readOnly: false
-            destructive: false
-          call: "smartrecruiters-candidates.create-candidate"
-          with:
-            firstName: "tools.firstName"
-            lastName: "tools.lastName"
-            email: "tools.email"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-candidate-applications
-          description: List all job applications associated with a candidate
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "smartrecruiters-candidates.list-candidate-applications"
-          with:
-            candidateId: "tools.candidateId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: add-candidate-note
-          description: Add a recruiter note to a candidate profile
-          hints:
-            readOnly: false
-            destructive: false
-          call: "smartrecruiters-candidates.create-candidate-message"
-          with:
-            candidateId: "tools.candidateId"
-            message: "tools.message"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: talent-acquisition-api
+    description: Unified REST API for end-to-end talent acquisition workflows.
+    resources:
+    - path: /v1/jobs
+      name: jobs
+      description: Job lifecycle management
+      operations:
+      - method: GET
+        name: list-jobs
+        description: List all jobs with optional filters
+        call: smartrecruiters-jobs.list-jobs
+        with:
+          q: rest.q
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-job
+        description: Create a new job opening
+        call: smartrecruiters-jobs.create-job
+        with:
+          title: rest.title
+          department: rest.department
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobId}
+      name: job
+      description: Individual job management
+      operations:
+      - method: GET
+        name: get-job
+        description: Get job details
+        call: smartrecruiters-jobs.get-job
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobId}/candidates
+      name: job-candidates
+      description: Candidates for a job
+      operations:
+      - method: GET
+        name: list-job-candidates
+        description: List candidates for a job
+        call: smartrecruiters-jobs.list-job-candidates
+        with:
+          jobId: rest.jobId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/postings
+      name: postings
+      description: Public job postings for career sites
+      operations:
+      - method: GET
+        name: list-postings
+        description: List public job postings
+        call: smartrecruiters-posting.list-postings
+        with:
+          companyIdentifier: rest.companyIdentifier
+          q: rest.q
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/postings/{postingId}
+      name: posting
+      description: Individual public job posting
+      operations:
+      - method: GET
+        name: get-posting
+        description: Get a specific job posting
+        call: smartrecruiters-posting.get-posting
+        with:
+          companyIdentifier: rest.companyIdentifier
+          postingId: rest.postingId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/postings/{postingId}/applications
+      name: applications
+      description: Candidate application submission
+      operations:
+      - method: POST
+        name: submit-application
+        description: Submit a job application
+        call: smartrecruiters-posting.submit-application
+        with:
+          companyIdentifier: rest.companyIdentifier
+          postingId: rest.postingId
+          firstName: rest.firstName
+          lastName: rest.lastName
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/candidates
+      name: candidates
+      description: Candidate profile management
+      operations:
+      - method: GET
+        name: list-candidates
+        description: List candidate profiles
+        call: smartrecruiters-candidates.list-candidates
+        with:
+          q: rest.q
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/candidates/{candidateId}
+      name: candidate
+      description: Individual candidate profile
+      operations:
+      - method: GET
+        name: get-candidate
+        description: Get a candidate profile
+        call: smartrecruiters-candidates.get-candidate
+        with:
+          candidateId: rest.candidateId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9080
+    namespace: talent-acquisition-mcp
+    transport: http
+    description: MCP server for AI-assisted talent acquisition and recruiting workflows.
+    tools:
+    - name: list-jobs
+      description: List open positions with optional filtering by status or keyword
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-jobs.list-jobs
+      with:
+        q: tools.q
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job
+      description: Get detailed information about a specific job opening
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-jobs.get-job
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-job
+      description: Create a new job opening in SmartRecruiters
+      hints:
+        readOnly: false
+        destructive: false
+      call: smartrecruiters-jobs.create-job
+      with:
+        title: tools.title
+        department: tools.department
+        location: tools.location
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-job-status
+      description: Move a job to a new status in the hiring workflow
+      hints:
+        readOnly: false
+        idempotent: true
+      call: smartrecruiters-jobs.update-job-status
+      with:
+        jobId: tools.jobId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-hiring-team
+      description: Get the recruiting team assigned to a job
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-jobs.get-job-hiring-team
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-job-candidates
+      description: List candidates who applied for a specific job
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-jobs.list-job-candidates
+      with:
+        jobId: tools.jobId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-postings
+      description: Browse public job postings on the career site
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-posting.list-postings
+      with:
+        companyIdentifier: tools.companyIdentifier
+        q: tools.q
+        country: tools.country
+        department: tools.department
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-posting
+      description: Get the full details of a public job posting
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-posting.get-posting
+      with:
+        companyIdentifier: tools.companyIdentifier
+        postingId: tools.postingId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: submit-application
+      description: Submit a candidate application for a job posting
+      hints:
+        readOnly: false
+        destructive: false
+      call: smartrecruiters-posting.submit-application
+      with:
+        companyIdentifier: tools.companyIdentifier
+        postingId: tools.postingId
+        firstName: tools.firstName
+        lastName: tools.lastName
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-status
+      description: Check the current status of a candidate's application
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-posting.get-application-status
+      with:
+        companyIdentifier: tools.companyIdentifier
+        postingId: tools.postingId
+        candidateId: tools.candidateId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-candidates
+      description: Search and list candidate profiles in the system
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-candidates.list-candidates
+      with:
+        q: tools.q
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-candidate
+      description: Get a candidate's full profile including contact info and history
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-candidates.get-candidate
+      with:
+        candidateId: tools.candidateId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-candidate
+      description: Import a new candidate profile into SmartRecruiters
+      hints:
+        readOnly: false
+        destructive: false
+      call: smartrecruiters-candidates.create-candidate
+      with:
+        firstName: tools.firstName
+        lastName: tools.lastName
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-candidate-applications
+      description: List all job applications associated with a candidate
+      hints:
+        readOnly: true
+        openWorld: true
+      call: smartrecruiters-candidates.list-candidate-applications
+      with:
+        candidateId: tools.candidateId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-candidate-note
+      description: Add a recruiter note to a candidate profile
+      hints:
+        readOnly: false
+        destructive: false
+      call: smartrecruiters-candidates.create-candidate-message
+      with:
+        candidateId: tools.candidateId
+        message: tools.message
+      outputParameters:
+      - type: object
+        mapping: $.
