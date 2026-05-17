@@ -158,7 +158,7 @@ common:
     url: https://developers.smartrecruiters.com/docs/the-smartrecruiters-platform
   - type: Authentication
     url: https://developers.smartrecruiters.com/docs/authentication
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/smartrecruiters
   - type: Blog
     url: https://www.smartrecruiters.com/blog/
