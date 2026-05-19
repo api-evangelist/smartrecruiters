@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SmartRecruiters Candidate API — Documents
+  description: 'SmartRecruiters Candidate API — Documents. 1 operations. Lead operation: List Candidate Documents. Self-contained
+    Naftiko capability covering one Smartrecruiters business surface.'
+  tags:
+  - Smartrecruiters
+  - Documents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SMARTRECRUITERS_API_KEY: SMARTRECRUITERS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: candidates-documents
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Candidate API — Documents business capability. Self-contained, no shared references.
+    resources:
+    - name: candidates-candidateId-documents
+      path: /candidates/{candidateId}/documents
+      operations:
+      - name: listcandidatedocuments
+        method: GET
+        description: List Candidate Documents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: candidateId
+          in: path
+          type: string
+          description: The unique candidate identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SMARTRECRUITERS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: candidates-documents-rest
+    port: 8080
+    description: REST adapter for SmartRecruiters Candidate API — Documents. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/candidates/{candidateid}/documents
+      name: candidates-candidateid-documents
+      description: REST surface for candidates-candidateId-documents.
+      operations:
+      - method: GET
+        name: listcandidatedocuments
+        description: List Candidate Documents
+        call: candidates-documents.listcandidatedocuments
+        with:
+          candidateId: rest.candidateId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: candidates-documents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SmartRecruiters Candidate API — Documents. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-candidate-documents
+      description: List Candidate Documents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: candidates-documents.listcandidatedocuments
+      with:
+        candidateId: tools.candidateId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,150 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SmartRecruiters Posting API — Applications
+  description: 'SmartRecruiters Posting API — Applications. 2 operations. Lead operation: Submit Job Application. Self-contained
+    Naftiko capability covering one Smartrecruiters business surface.'
+  tags:
+  - Smartrecruiters
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SMARTRECRUITERS_API_KEY: SMARTRECRUITERS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: posting-applications
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Posting API — Applications business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-companies-companyIdentifier-postings-postingId-candidates
+      path: /v1/companies/{companyIdentifier}/postings/{postingId}/candidates
+      operations:
+      - name: submitapplication
+        method: POST
+        description: Submit Job Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: companyIdentifier
+          in: path
+          type: string
+          description: The company identifier
+          required: true
+        - name: postingId
+          in: path
+          type: string
+          description: The unique posting ID or UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-companies-companyIdentifier-postings-postingId-candidates-candidateId-status
+      path: /v1/companies/{companyIdentifier}/postings/{postingId}/candidates/{candidateId}/status
+      operations:
+      - name: getapplicationstatus
+        method: GET
+        description: Get Application Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: companyIdentifier
+          in: path
+          type: string
+          description: The company identifier
+          required: true
+        - name: postingId
+          in: path
+          type: string
+          description: The unique posting ID or UUID
+          required: true
+        - name: candidateId
+          in: path
+          type: string
+          description: The candidate ID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SMARTRECRUITERS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: posting-applications-rest
+    port: 8080
+    description: REST adapter for SmartRecruiters Posting API — Applications. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/companies/{companyidentifier}/postings/{postingid}/candidates
+      name: v1-companies-companyidentifier-postings-postingid-candidates
+      description: REST surface for v1-companies-companyIdentifier-postings-postingId-candidates.
+      operations:
+      - method: POST
+        name: submitapplication
+        description: Submit Job Application
+        call: posting-applications.submitapplication
+        with:
+          companyIdentifier: rest.companyIdentifier
+          postingId: rest.postingId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/companies/{companyidentifier}/postings/{postingid}/candidates/{candidateid}/status
+      name: v1-companies-companyidentifier-postings-postingid-candidates-candidateid-status
+      description: REST surface for v1-companies-companyIdentifier-postings-postingId-candidates-candidateId-status.
+      operations:
+      - method: GET
+        name: getapplicationstatus
+        description: Get Application Status
+        call: posting-applications.getapplicationstatus
+        with:
+          companyIdentifier: rest.companyIdentifier
+          postingId: rest.postingId
+          candidateId: rest.candidateId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: posting-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SmartRecruiters Posting API — Applications. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: submit-job-application
+      description: Submit Job Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: posting-applications.submitapplication
+      with:
+        companyIdentifier: tools.companyIdentifier
+        postingId: tools.postingId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-status
+      description: Get Application Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: posting-applications.getapplicationstatus
+      with:
+        companyIdentifier: tools.companyIdentifier
+        postingId: tools.postingId
+        candidateId: tools.candidateId
+      outputParameters:
+      - type: object
+        mapping: $.

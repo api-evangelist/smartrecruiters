@@ -1,0 +1,96 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SmartRecruiters Job API — Candidates
+  description: 'SmartRecruiters Job API — Candidates. 1 operations. Lead operation: List Job Candidates. Self-contained Naftiko
+    capability covering one Smartrecruiters business surface.'
+  tags:
+  - Smartrecruiters
+  - Candidates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SMARTRECRUITERS_API_KEY: SMARTRECRUITERS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: jobs-candidates
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Job API — Candidates business capability. Self-contained, no shared references.
+    resources:
+    - name: jobs-jobId-candidates
+      path: /jobs/{jobId}/candidates
+      operations:
+      - name: listjobcandidates
+        method: GET
+        description: List Job Candidates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique job identifier
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Filter by candidate status
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.SMARTRECRUITERS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: jobs-candidates-rest
+    port: 8080
+    description: REST adapter for SmartRecruiters Job API — Candidates. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/jobs/{jobid}/candidates
+      name: jobs-jobid-candidates
+      description: REST surface for jobs-jobId-candidates.
+      operations:
+      - method: GET
+        name: listjobcandidates
+        description: List Job Candidates
+        call: jobs-candidates.listjobcandidates
+        with:
+          jobId: rest.jobId
+          status: rest.status
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: jobs-candidates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SmartRecruiters Job API — Candidates. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-job-candidates
+      description: List Job Candidates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jobs-candidates.listjobcandidates
+      with:
+        jobId: tools.jobId
+        status: tools.status
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.

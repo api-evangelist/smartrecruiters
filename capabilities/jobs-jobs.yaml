@@ -1,0 +1,371 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SmartRecruiters Job API — Jobs
+  description: 'SmartRecruiters Job API — Jobs. 7 operations. Lead operation: List Jobs. Self-contained Naftiko capability
+    covering one Smartrecruiters business surface.'
+  tags:
+  - Smartrecruiters
+  - Jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SMARTRECRUITERS_API_KEY: SMARTRECRUITERS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: jobs-jobs
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Job API — Jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: jobs
+      path: /jobs
+      operations:
+      - name: listjobs
+        method: GET
+        description: List Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Full-text search query
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results to return
+        - name: offset
+          in: query
+          type: integer
+          description: Number of results to skip for pagination
+        - name: status
+          in: query
+          type: string
+          description: Filter by job status
+        - name: department
+          in: query
+          type: string
+          description: Filter by department ID
+      - name: createjob
+        method: POST
+        description: Create Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: jobs-jobId
+      path: /jobs/{jobId}
+      operations:
+      - name: getjob
+        method: GET
+        description: Get Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique job identifier
+          required: true
+      - name: updatejob
+        method: PATCH
+        description: Update Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique job identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: jobs-jobId-candidates
+      path: /jobs/{jobId}/candidates
+      operations:
+      - name: listjobcandidates
+        method: GET
+        description: List Job Candidates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique job identifier
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Filter by candidate status
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+    - name: jobs-jobId-hiring-team
+      path: /jobs/{jobId}/hiring-team
+      operations:
+      - name: getjobhiringteam
+        method: GET
+        description: Get Job Hiring Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique job identifier
+          required: true
+    - name: jobs-jobId-status
+      path: /jobs/{jobId}/status
+      operations:
+      - name: updatejobstatus
+        method: PUT
+        description: Update Job Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique job identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SMARTRECRUITERS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: jobs-jobs-rest
+    port: 8080
+    description: REST adapter for SmartRecruiters Job API — Jobs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/jobs
+      name: jobs
+      description: REST surface for jobs.
+      operations:
+      - method: GET
+        name: listjobs
+        description: List Jobs
+        call: jobs-jobs.listjobs
+        with:
+          q: rest.q
+          limit: rest.limit
+          offset: rest.offset
+          status: rest.status
+          department: rest.department
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createjob
+        description: Create Job
+        call: jobs-jobs.createjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}
+      name: jobs-jobid
+      description: REST surface for jobs-jobId.
+      operations:
+      - method: GET
+        name: getjob
+        description: Get Job
+        call: jobs-jobs.getjob
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatejob
+        description: Update Job
+        call: jobs-jobs.updatejob
+        with:
+          jobId: rest.jobId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/candidates
+      name: jobs-jobid-candidates
+      description: REST surface for jobs-jobId-candidates.
+      operations:
+      - method: GET
+        name: listjobcandidates
+        description: List Job Candidates
+        call: jobs-jobs.listjobcandidates
+        with:
+          jobId: rest.jobId
+          status: rest.status
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/hiring-team
+      name: jobs-jobid-hiring-team
+      description: REST surface for jobs-jobId-hiring-team.
+      operations:
+      - method: GET
+        name: getjobhiringteam
+        description: Get Job Hiring Team
+        call: jobs-jobs.getjobhiringteam
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/status
+      name: jobs-jobid-status
+      description: REST surface for jobs-jobId-status.
+      operations:
+      - method: PUT
+        name: updatejobstatus
+        description: Update Job Status
+        call: jobs-jobs.updatejobstatus
+        with:
+          jobId: rest.jobId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: jobs-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SmartRecruiters Job API — Jobs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-jobs
+      description: List Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jobs-jobs.listjobs
+      with:
+        q: tools.q
+        limit: tools.limit
+        offset: tools.offset
+        status: tools.status
+        department: tools.department
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-job
+      description: Create Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jobs-jobs.createjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job
+      description: Get Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jobs-jobs.getjob
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-job
+      description: Update Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: jobs-jobs.updatejob
+      with:
+        jobId: tools.jobId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-job-candidates
+      description: List Job Candidates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jobs-jobs.listjobcandidates
+      with:
+        jobId: tools.jobId
+        status: tools.status
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-hiring-team
+      description: Get Job Hiring Team
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jobs-jobs.getjobhiringteam
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-job-status
+      description: Update Job Status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: jobs-jobs.updatejobstatus
+      with:
+        jobId: tools.jobId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

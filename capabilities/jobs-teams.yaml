@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SmartRecruiters Job API — Teams
+  description: 'SmartRecruiters Job API — Teams. 1 operations. Lead operation: Get Job Hiring Team. Self-contained Naftiko
+    capability covering one Smartrecruiters business surface.'
+  tags:
+  - Smartrecruiters
+  - Teams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SMARTRECRUITERS_API_KEY: SMARTRECRUITERS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: jobs-teams
+    baseUri: https://api.smartrecruiters.com
+    description: SmartRecruiters Job API — Teams business capability. Self-contained, no shared references.
+    resources:
+    - name: jobs-jobId-hiring-team
+      path: /jobs/{jobId}/hiring-team
+      operations:
+      - name: getjobhiringteam
+        method: GET
+        description: Get Job Hiring Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique job identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SMARTRECRUITERS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: jobs-teams-rest
+    port: 8080
+    description: REST adapter for SmartRecruiters Job API — Teams. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/jobs/{jobid}/hiring-team
+      name: jobs-jobid-hiring-team
+      description: REST surface for jobs-jobId-hiring-team.
+      operations:
+      - method: GET
+        name: getjobhiringteam
+        description: Get Job Hiring Team
+        call: jobs-teams.getjobhiringteam
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: jobs-teams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SmartRecruiters Job API — Teams. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-job-hiring-team
+      description: Get Job Hiring Team
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jobs-teams.getjobhiringteam
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
