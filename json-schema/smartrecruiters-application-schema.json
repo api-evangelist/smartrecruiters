@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Application",
+  "title": "Application",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "candidateId": {
+      "type": "string"
+    },
+    "jobId": {
+      "type": "string"
+    },
+    "jobTitle": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "REJECTED",
+        "OFFERED",
+        "HIRED"
+      ]
+    },
+    "appliedOn": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedOn": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "$ref": "#/components/schemas/SourceDetails"
+    }
+  }
+}

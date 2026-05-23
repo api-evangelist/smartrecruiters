@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PostingListResult",
+  "title": "PostingListResult",
+  "type": "object",
+  "properties": {
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of results returned"
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Number of results skipped"
+    },
+    "totalFound": {
+      "type": "integer",
+      "description": "Total number of matching postings"
+    },
+    "content": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Posting"
+      }
+    }
+  }
+}

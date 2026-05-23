@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationSubmission",
+  "title": "ApplicationSubmission",
+  "type": "object",
+  "required": [
+    "firstName",
+    "lastName",
+    "email"
+  ],
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "description": "Candidate first name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Candidate last name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Candidate email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Candidate phone number"
+    },
+    "location": {
+      "$ref": "#/components/schemas/Location"
+    },
+    "web": {
+      "type": "object",
+      "properties": {
+        "linkedIn": {
+          "type": "string",
+          "format": "uri"
+        },
+        "facebook": {
+          "type": "string",
+          "format": "uri"
+        },
+        "portfolio": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "answers": {
+      "type": "array",
+      "description": "Answers to screening questions",
+      "items": {
+        "$ref": "#/components/schemas/Answer"
+      }
+    }
+  }
+}

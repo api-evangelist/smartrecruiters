@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Question",
+  "title": "Question",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "TEXT",
+        "SINGLE_SELECT",
+        "MULTI_SELECT",
+        "DATE",
+        "NUMBER",
+        "BOOLEAN"
+      ]
+    },
+    "answerOptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

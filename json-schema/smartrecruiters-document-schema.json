@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Document",
+  "title": "Document",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "RESUME",
+        "COVER_LETTER",
+        "ATTACHMENT"
+      ]
+    },
+    "contentType": {
+      "type": "string"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "addedOn": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

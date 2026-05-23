@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationResult",
+  "title": "ApplicationResult",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Application ID"
+    },
+    "candidateId": {
+      "type": "string",
+      "description": "Candidate ID"
+    },
+    "postingId": {
+      "type": "string",
+      "description": "Posting ID"
+    },
+    "status": {
+      "type": "string",
+      "description": "Initial application status"
+    }
+  }
+}

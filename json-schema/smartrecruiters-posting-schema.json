@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Posting",
+  "title": "Posting",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique posting identifier"
+    },
+    "uuid": {
+      "type": "string",
+      "description": "Universal unique identifier for the posting"
+    },
+    "title": {
+      "type": "string",
+      "description": "Job title"
+    },
+    "department": {
+      "$ref": "#/components/schemas/Department"
+    },
+    "location": {
+      "$ref": "#/components/schemas/Location"
+    },
+    "releasedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date when the posting was released"
+    },
+    "applyUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to apply for the position"
+    },
+    "industry": {
+      "$ref": "#/components/schemas/Industry"
+    },
+    "function": {
+      "$ref": "#/components/schemas/Function"
+    },
+    "experienceLevel": {
+      "$ref": "#/components/schemas/ExperienceLevel"
+    },
+    "employmentType": {
+      "$ref": "#/components/schemas/EmploymentType"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanySummary"
+    }
+  }
+}

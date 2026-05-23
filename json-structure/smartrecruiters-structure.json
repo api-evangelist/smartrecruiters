@@ -1,0 +1,142 @@
+{
+  "provider": "SmartRecruiters",
+  "providerId": "smartrecruiters",
+  "kind": "json-structure",
+  "description": "Structural overview of the SmartRecruiters API surface; extracted from openapi/.",
+  "schemaCount": 15,
+  "operationCount": 4,
+  "schemas": [
+    {
+      "name": "PostingListResult",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Posting",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "PostingDetails",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "ApplicationSubmission",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "firstName",
+        "lastName",
+        "email"
+      ]
+    },
+    {
+      "name": "ApplicationResult",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ApplicationStatus",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Department",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Location",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "Industry",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Function",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ExperienceLevel",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "EmploymentType",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CompanySummary",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Question",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Answer",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/v1/companies/{companyIdentifier}/postings",
+      "operationId": "listPostings",
+      "summary": "List Job Postings",
+      "tags": [
+        "Postings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/companies/{companyIdentifier}/postings/{postingId}",
+      "operationId": "getPosting",
+      "summary": "Get Job Posting",
+      "tags": [
+        "Postings"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/companies/{companyIdentifier}/postings/{postingId}/candidates",
+      "operationId": "submitApplication",
+      "summary": "Submit Job Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/companies/{companyIdentifier}/postings/{postingId}/candidates/{candidateId}/status",
+      "operationId": "getApplicationStatus",
+      "summary": "Get Application Status",
+      "tags": [
+        "Applications"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PostingDetails",
+  "title": "PostingDetails",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Posting"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "jobAd": {
+          "type": "object",
+          "properties": {
+            "sections": {
+              "type": "object",
+              "properties": {
+                "companyDescription": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "jobDescription": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "qualifications": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalInformation": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "questionnaire": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "questions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the posting"
+        }
+      }
+    }
+  ]
+}

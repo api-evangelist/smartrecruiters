@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Answer",
+  "title": "Answer",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Question ID"
+    },
+    "answer": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    }
+  }
+}

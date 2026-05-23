@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JobCreate",
+  "title": "JobCreate",
+  "type": "object",
+  "required": [
+    "title",
+    "department",
+    "location"
+  ],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "refNumber": {
+      "type": "string"
+    },
+    "department": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "remote": {
+          "type": "boolean"
+        }
+      }
+    },
+    "industry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "function": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "experienceLevel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "typeOfEmployment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "jobAd": {
+      "type": "object",
+      "properties": {
+        "sections": {
+          "type": "object",
+          "properties": {
+            "jobDescription": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              }
+            },
+            "qualifications": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
