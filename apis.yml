@@ -161,6 +161,8 @@ common:
   url: https://www.smartrecruiters.com/blog/
 - type: Marketplace
   url: https://www.smartrecruiters.com/marketplace/
+- type: LLMsTxt
+  url: https://developers.smartrecruiters.com/llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
