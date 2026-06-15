@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SmartRecruiters Posting API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SmartToken",
+      "value": "{{X-SmartToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Postings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Job Postings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/v1/companies/:companyIdentifier/postings",
+            "params": [
+              {
+                "name": "companyIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The company identifier as it appears at the end of the default career site URL"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Full-text search query across job title and description"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country code (ISO 3166-1 alpha-2)"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Filter by region or state name"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Filter by city name"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "query",
+                "description": "Filter by department name"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Filter postings by language code (e.g., en, fr, de)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of active job postings published by a company. Supports filtering by keyword, location, department, and custom fields."
+        },
+        {
+          "info": {
+            "name": "Get Job Posting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/v1/companies/:companyIdentifier/postings/:postingId",
+            "params": [
+              {
+                "name": "companyIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The company identifier"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path",
+                "description": "The unique posting ID or UUID"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific job posting including full job description, qualifications, company description, and location details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Job Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartrecruiters.com/v1/companies/:companyIdentifier/postings/:postingId/candidates",
+            "params": [
+              {
+                "name": "companyIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The company identifier"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path",
+                "description": "The unique posting ID or UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new candidate application for a specific job posting. Supports submission of candidate profile, screening question answers, and resume/CV attachments."
+        },
+        {
+          "info": {
+            "name": "Get Application Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/v1/companies/:companyIdentifier/postings/:postingId/candidates/:candidateId/status",
+            "params": [
+              {
+                "name": "companyIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The company identifier"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path",
+                "description": "The unique posting ID or UUID"
+              },
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The candidate ID"
+              }
+            ]
+          },
+          "docs": "Retrieves the current application status of a specific candidate for a specific job posting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

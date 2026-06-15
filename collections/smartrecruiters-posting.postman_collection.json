@@ -1,0 +1,1694 @@
+{
+  "item": [
+    {
+      "id": "0e231498-52bd-40d9-995c-6455d42ed5ab",
+      "name": "Postings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "670be1e9-13e4-4b1a-9b07-646c09e99fed",
+          "name": "List Job Postings",
+          "request": {
+            "name": "List Job Postings",
+            "description": {
+              "content": "Returns a paginated list of active job postings published by a company. Supports filtering by keyword, location, department, and custom fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":companyIdentifier",
+                "postings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Full-text search query across job title and description"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Filter by country code (ISO 3166-1 alpha-2)"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Filter by region or state name"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "Filter by city name"
+                },
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<string>",
+                  "description": "Filter by department name"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "Filter postings by language code (e.g., en, fr, de)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyIdentifier",
+                  "description": "(Required) The company identifier as it appears at the end of the default career site URL"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f1b77c7-a535-4ada-a95e-38d6075ea35d",
+              "name": "List of job postings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier as it appears at the end of the default career site URL"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 7790,\n  \"offset\": 7958,\n  \"totalFound\": 3458,\n  \"content\": [\n    {\n      \"id\": \"string\",\n      \"uuid\": \"string\",\n      \"title\": \"string\",\n      \"department\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"location\": {\n        \"country\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"region\": \"<string>\",\n        \"city\": \"<string>\",\n        \"address\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"remote\": \"<boolean>\"\n      },\n      \"releasedDate\": \"1987-04-21T09:12:57.403Z\",\n      \"applyUrl\": \"https://yQkcJGxgaSgCptjJsxkPnJuExbAzgxhP.rtc5yV3dVPr\",\n      \"industry\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"function\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"experienceLevel\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"employmentType\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"company\": {\n        \"identifier\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"uuid\": \"string\",\n      \"title\": \"string\",\n      \"department\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"location\": {\n        \"country\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"region\": \"<string>\",\n        \"city\": \"<string>\",\n        \"address\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"remote\": \"<boolean>\"\n      },\n      \"releasedDate\": \"1967-08-13T04:58:12.031Z\",\n      \"applyUrl\": \"http://qqMZzhogrnvbiQOVaTwUJIJDNvGV.bnnfATDPwsnQDXrGJ7xHkOWXejqcEHGbKxgB7BD,ZDF8lBFjMIA-sqvX\",\n      \"industry\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"function\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"experienceLevel\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"employmentType\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"company\": {\n        \"identifier\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "535bf7b4-61e0-4fe1-9787-7c5c5eb5301b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier as it appears at the end of the default career site URL"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e1ea9c70-4317-497d-9e49-2e4261644dbb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier as it appears at the end of the default career site URL"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6fd09212-dd9f-4260-adc2-96b337078f81",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier as it appears at the end of the default career site URL"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1e6aec8-2045-4c49-a9be-d154bb60cb1a",
+              "name": "Company not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier as it appears at the end of the default career site URL"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "576e02a4-1610-47bc-8425-03b32c4d4853",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier as it appears at the end of the default career site URL"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02669a1e-e48b-48cc-b2a6-35c49f79dc5c",
+          "name": "Get Job Posting",
+          "request": {
+            "name": "Get Job Posting",
+            "description": {
+              "content": "Retrieves detailed information about a specific job posting including full job description, qualifications, company description, and location details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":companyIdentifier",
+                "postings",
+                ":postingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyIdentifier",
+                  "description": "(Required) The company identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "postingId",
+                  "description": "(Required) The unique posting ID or UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3908b9c7-8178-4a7c-ad76-ddc965dd0804",
+              "name": "Job posting details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"uuid\": \"string\",\n  \"title\": \"string\",\n  \"department\": {\n    \"id\": \"string\",\n    \"label\": \"string\"\n  },\n  \"location\": {\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"remote\": \"<boolean>\"\n  },\n  \"releasedDate\": \"1950-02-20T14:46:21.075Z\",\n  \"applyUrl\": \"http://fOaPbCHvvSzdIGZJW.rijfr.MAH3szsoAPILKRHDdgujO7NDVMPhoIJGn57\",\n  \"industry\": {\n    \"id\": \"string\",\n    \"label\": \"string\"\n  },\n  \"function\": {\n    \"id\": \"string\",\n    \"label\": \"string\"\n  },\n  \"experienceLevel\": {\n    \"id\": \"string\",\n    \"label\": \"string\"\n  },\n  \"employmentType\": {\n    \"id\": \"string\",\n    \"label\": \"string\"\n  },\n  \"company\": {\n    \"identifier\": \"string\",\n    \"name\": \"string\"\n  },\n  \"jobAd\": {\n    \"sections\": {\n      \"companyDescription\": {\n        \"title\": \"string\",\n        \"text\": \"string\"\n      },\n      \"jobDescription\": {\n        \"title\": \"string\",\n        \"text\": \"string\"\n      },\n      \"qualifications\": {\n        \"title\": \"string\",\n        \"text\": \"string\"\n      },\n      \"additionalInformation\": {\n        \"title\": \"string\",\n        \"text\": \"string\"\n      }\n    }\n  },\n  \"questionnaire\": {\n    \"id\": \"string\",\n    \"questions\": [\n      {\n        \"id\": \"string\",\n        \"required\": true,\n        \"label\": \"string\",\n        \"type\": \"DATE\",\n        \"answerOptions\": [\n          {\n            \"id\": \"string\",\n            \"label\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"label\": \"string\"\n          }\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"required\": true,\n        \"label\": \"string\",\n        \"type\": \"NUMBER\",\n        \"answerOptions\": [\n          {\n            \"id\": \"string\",\n            \"label\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"label\": \"string\"\n          }\n        ]\n      }\n    ]\n  },\n  \"language\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e5844e5-c7e8-4794-ac99-81ffbfe27d30",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "afa3f4ce-6140-42bf-b467-c5967a41cfc8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "adba6eb3-ccb0-42ba-86b2-b268f29e74bf",
+              "name": "Posting not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ae28bf1b-5a93-4353-9e19-25f56eba68ff",
+      "name": "Applications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "245427e0-1a80-423a-8c06-97f4669aae1b",
+          "name": "Submit Job Application",
+          "request": {
+            "name": "Submit Job Application",
+            "description": {
+              "content": "Creates a new candidate application for a specific job posting. Supports submission of candidate profile, screening question answers, and resume/CV attachments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":companyIdentifier",
+                "postings",
+                ":postingId",
+                "candidates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyIdentifier",
+                  "description": "(Required) The company identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "postingId",
+                  "description": "(Required) The unique posting ID or UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"location\": {\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"remote\": \"<boolean>\"\n  },\n  \"web\": {\n    \"linkedIn\": \"<uri>\",\n    \"facebook\": \"<uri>\",\n    \"portfolio\": \"<uri>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc1ece03-1f7f-4c63-a07d-4500e96ca1e8",
+              "name": "Application submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"location\": {\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"remote\": \"<boolean>\"\n  },\n  \"web\": {\n    \"linkedIn\": \"<uri>\",\n    \"facebook\": \"<uri>\",\n    \"portfolio\": \"<uri>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"candidateId\": \"string\",\n  \"postingId\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "498f56fb-d7a5-45f4-9c7d-5c6398a9405c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"location\": {\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"remote\": \"<boolean>\"\n  },\n  \"web\": {\n    \"linkedIn\": \"<uri>\",\n    \"facebook\": \"<uri>\",\n    \"portfolio\": \"<uri>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "525c6794-9087-4a70-b736-3945ba8b5953",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"location\": {\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"remote\": \"<boolean>\"\n  },\n  \"web\": {\n    \"linkedIn\": \"<uri>\",\n    \"facebook\": \"<uri>\",\n    \"portfolio\": \"<uri>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71a8bdeb-7eec-485e-ba69-af250a60726f",
+              "name": "Posting not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"location\": {\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"remote\": \"<boolean>\"\n  },\n  \"web\": {\n    \"linkedIn\": \"<uri>\",\n    \"facebook\": \"<uri>\",\n    \"portfolio\": \"<uri>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9962c5a9-e4ef-48e1-aa23-8edc20f96f7e",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"location\": {\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"remote\": \"<boolean>\"\n  },\n  \"web\": {\n    \"linkedIn\": \"<uri>\",\n    \"facebook\": \"<uri>\",\n    \"portfolio\": \"<uri>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"answer\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b26ecb3-c07a-4555-a6a7-3daac8f4bd8b",
+          "name": "Get Application Status",
+          "request": {
+            "name": "Get Application Status",
+            "description": {
+              "content": "Retrieves the current application status of a specific candidate for a specific job posting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":companyIdentifier",
+                "postings",
+                ":postingId",
+                "candidates",
+                ":candidateId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyIdentifier",
+                  "description": "(Required) The company identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "postingId",
+                  "description": "(Required) The unique posting ID or UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "candidateId",
+                  "description": "(Required) The candidate ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a57d661f-1a97-4b5e-954e-abb4ce3ac605",
+              "name": "Application status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates",
+                    ":candidateId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "candidateId",
+                      "description": "(Required) The candidate ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"candidateId\": \"string\",\n  \"postingId\": \"string\",\n  \"status\": \"REJECTED\",\n  \"reasonForRejection\": {\n    \"id\": \"string\",\n    \"label\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f715dc03-b6a1-4311-b5df-cb572038075a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates",
+                    ":candidateId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "candidateId",
+                      "description": "(Required) The candidate ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "842aff53-e3b1-418d-9a72-01f1a5830a6f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates",
+                    ":candidateId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "candidateId",
+                      "description": "(Required) The candidate ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19ea102f-6773-41f7-8514-54c2f89f1cff",
+              "name": "Application not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyIdentifier",
+                    "postings",
+                    ":postingId",
+                    "candidates",
+                    ":candidateId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyIdentifier",
+                      "description": "(Required) The company identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postingId",
+                      "description": "(Required) The unique posting ID or UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "candidateId",
+                      "description": "(Required) The candidate ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SmartToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smartrecruiters.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SmartToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d1933f82-8e72-49b3-ba6a-1768904f11e9",
+    "name": "SmartRecruiters Posting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SmartRecruiters Posting API enables customers to build fully customizable career sites by providing access to published job postings. Supports searching and filtering postings by keyword, location, department, language, and custom fields.\n\nContact Support:\n Name: SmartRecruiters Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SmartRecruiters Candidate API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SmartToken",
+      "value": "{{X-SmartToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Candidates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Candidates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query for candidate name or email"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by application status"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of candidates. Supports filtering by name, email, application status, and date ranges."
+        },
+        {
+          "info": {
+            "name": "Create Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartrecruiters.com/candidates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports a new candidate into the SmartRecruiters system. Creates a candidate profile with personal information and optional application data."
+        },
+        {
+          "info": {
+            "name": "Get Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed profile information for a specific candidate."
+        },
+        {
+          "info": {
+            "name": "Update Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates properties of an existing candidate profile."
+        },
+        {
+          "info": {
+            "name": "List Candidate Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/applications",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ]
+          },
+          "docs": "Returns all job applications associated with a specific candidate."
+        },
+        {
+          "info": {
+            "name": "List Candidate Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/messages",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ]
+          },
+          "docs": "Returns all notes and messages associated with a candidate."
+        },
+        {
+          "info": {
+            "name": "Create Candidate Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/messages",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a note or message to a candidate profile."
+        },
+        {
+          "info": {
+            "name": "List Candidate Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/documents",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ]
+          },
+          "docs": "Returns all documents (resumes, CVs, cover letters) attached to a candidate profile."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
