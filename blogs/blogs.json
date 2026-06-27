@@ -3,16 +3,10 @@
   "feeds": [
     {
       "source": "https://www.smartrecruiters.com/blog/",
-      "error": "HTTPError"
-    },
-    {
-      "source": "https://github.com/smartrecruiters",
-      "feed_url": "https://github.com/smartrecruiters",
-      "title": "",
       "saved": 0,
-      "method": "none"
+      "error": "HTTP 403 Forbidden"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
-  "post_count": 0
+  "post_count": 10,
+  "fetched": "2026-06-27T13:10:20Z"
 }

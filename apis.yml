@@ -143,7 +143,7 @@ common:
     url: https://www.linkedin.com/company/smartrecruiters
   - type: Website
     url: https://www.smartrecruiters.com/
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developers.smartrecruiters.com/
   - type: Documentation
     url: https://developers.smartrecruiters.com/docs/the-smartrecruiters-platform
@@ -155,7 +155,7 @@ common:
     url: https://www.smartrecruiters.com/blog/
   - type: Marketplace
     url: https://www.smartrecruiters.com/marketplace/
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://developers.smartrecruiters.com/llms.txt
 maintainers:
   - FN: Kin Lane
