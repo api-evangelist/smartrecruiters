@@ -1,0 +1,54 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/smartrecruiters-candidates-openapi.yml, openapi/smartrecruiters-jobs-openapi.yml,
+  openapi/smartrecruiters-posting-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/smartrecruiters-candidates-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
+- name: OAuth2
+  source: openapi/smartrecruiters-jobs-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
+- name: OAuth2
+  source: openapi/smartrecruiters-posting-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.smartrecruiters.com/identity/oauth/allow
+    tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
+scopes:
+- scope: candidates.read
+  description: Read candidate data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/smartrecruiters-candidates-openapi.yml
+  - openapi/smartrecruiters-posting-openapi.yml
+- scope: candidates.write
+  description: Write candidate data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/smartrecruiters-candidates-openapi.yml
+  - openapi/smartrecruiters-posting-openapi.yml
+- scope: jobs.read
+  description: Read job data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/smartrecruiters-jobs-openapi.yml
+  - openapi/smartrecruiters-posting-openapi.yml
+- scope: jobs.write
+  description: Write job data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/smartrecruiters-jobs-openapi.yml
+  - openapi/smartrecruiters-posting-openapi.yml

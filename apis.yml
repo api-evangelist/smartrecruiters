@@ -139,6 +139,10 @@ apis:
       - type: Documentation
         url: https://developers.smartrecruiters.com/docs/partners-job-board-api
 common:
+  - type: Authentication
+    url: authentication/smartrecruiters-authentication.yml
+  - type: OAuthScopes
+    url: scopes/smartrecruiters-scopes.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/smartrecruiters
   - type: Website
