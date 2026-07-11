@@ -1,0 +1,40 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/smartrecruiters-candidates-openapi.yml, openapi/smartrecruiters-jobs-openapi.yml,
+  openapi/smartrecruiters-posting-openapi.yml
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: X-SmartToken
+  sources:
+  - openapi/smartrecruiters-candidates-openapi.yml
+  - openapi/smartrecruiters-jobs-openapi.yml
+  - openapi/smartrecruiters-posting-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
+    scopes: 2
+  sources:
+  - openapi/smartrecruiters-candidates-openapi.yml
+  - openapi/smartrecruiters-jobs-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.smartrecruiters.com/identity/oauth/allow
+    tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
+    scopes: 4
+  sources:
+  - openapi/smartrecruiters-posting-openapi.yml
