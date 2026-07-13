@@ -2,11 +2,13 @@
   "repo": "smartrecruiters",
   "feeds": [
     {
-      "source": "https://www.smartrecruiters.com/blog/",
+      "source": "https://github.com/smartrecruiters",
+      "feed_url": "https://github.com/smartrecruiters",
+      "title": "",
       "saved": 0,
-      "error": "HTTP 403 Forbidden"
+      "method": "none"
     }
   ],
   "post_count": 10,
-  "fetched": "2026-06-27T13:10:20Z"
+  "fetched": "2026-07-11T11:50:51Z"
 }
