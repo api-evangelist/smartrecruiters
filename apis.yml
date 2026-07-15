@@ -139,6 +139,8 @@ apis:
       - type: Documentation
         url: https://developers.smartrecruiters.com/docs/partners-job-board-api
 common:
+  - type: AgenticAccess
+    url: agentic-access/smartrecruiters-agentic-access.yml
   - type: TrustCenter
     url: security/smartrecruiters-trust-center.yml
   - type: DomainSecurity
