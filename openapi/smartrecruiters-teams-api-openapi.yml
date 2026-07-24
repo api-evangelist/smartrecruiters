@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: SmartRecruiters Candidate Applications Teams API
+  description: The SmartRecruiters Candidate API enables customers to import, export, read, and update candidate data. Provides full candidate profile management including personal information, application history, notes, and attachments.
+  version: 1.0.0
+  contact:
+    name: SmartRecruiters Developer Support
+    url: https://developers.smartrecruiters.com/
+servers:
+- url: https://api.smartrecruiters.com
+  description: SmartRecruiters Production API
+security:
+- ApiKey: []
+tags:
+- name: Teams
+paths:
+  /jobs/{jobId}/hiring-team:
+    get:
+      operationId: getJobHiringTeam
+      summary: Get Job Hiring Team
+      description: Returns the hiring team members assigned to a specific job.
+      tags:
+      - Teams
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The unique job identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Hiring team members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobOwner:
+                    $ref: '#/components/schemas/TeamMember'
+                  hiringManagers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TeamMember'
+                  recruiters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TeamMember'
+                  coordinators:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TeamMember'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Job not found
+components:
+  schemas:
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-SmartToken
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
+          scopes:
+            candidates.read: Read candidate data
+            candidates.write: Write candidate data

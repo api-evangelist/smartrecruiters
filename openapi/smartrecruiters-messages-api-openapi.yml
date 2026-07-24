@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: SmartRecruiters Candidate Applications Messages API
+  description: The SmartRecruiters Candidate API enables customers to import, export, read, and update candidate data. Provides full candidate profile management including personal information, application history, notes, and attachments.
+  version: 1.0.0
+  contact:
+    name: SmartRecruiters Developer Support
+    url: https://developers.smartrecruiters.com/
+servers:
+- url: https://api.smartrecruiters.com
+  description: SmartRecruiters Production API
+security:
+- ApiKey: []
+tags:
+- name: Messages
+paths:
+  /candidates/{candidateId}/messages:
+    get:
+      operationId: listCandidateMessages
+      summary: List Candidate Messages
+      description: Returns all notes and messages associated with a candidate.
+      tags:
+      - Messages
+      parameters:
+      - name: candidateId
+        in: path
+        required: true
+        description: The unique candidate identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Candidate not found
+    post:
+      operationId: createCandidateMessage
+      summary: Create Candidate Message
+      description: Adds a note or message to a candidate profile.
+      tags:
+      - Messages
+      parameters:
+      - name: candidateId
+        in: path
+        required: true
+        description: The unique candidate identifier
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - message
+              properties:
+                message:
+                  type: string
+                  description: The message or note content
+      responses:
+        '201':
+          description: Message created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+          - NOTE
+          - EMAIL
+          - SYSTEM
+        createdOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-SmartToken
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
+          scopes:
+            candidates.read: Read candidate data
+            candidates.write: Write candidate data
