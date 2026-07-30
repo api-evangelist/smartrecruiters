@@ -5,9 +5,22 @@ description: >-
   and workforce management. The platform enables organizations to manage job postings, candidate applications,
   assessments, interviews, and offers through a unified REST API ecosystem.
 type: Index
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/smartrecruiters.png
 tags:
   - Human Resources
   - Recruiting
@@ -19,125 +32,174 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/smartrecruiters/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: smartrecruiters:posting-api
-    name: SmartRecruiters Posting API
-    description: >-
-      The Posting API enables customers to build fully customizable career sites by providing access to published job
-      postings. It supports searching and filtering postings by keyword, location, department, and custom fields.
-    humanURL: https://developers.smartrecruiters.com/docs/posting-api
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Jobs
-      - Postings
-      - Career Sites
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/posting-api
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/smartrecruiters/refs/heads/main/openapi/smartrecruiters-posting-openapi.yml
-  - aid: smartrecruiters:job-api
-    name: SmartRecruiters Job API
-    description: >-
-      The Job API enables customers to extract and import jobs data, supporting full job lifecycle management including
-      creation, updates, and status management.
-    humanURL: https://developers.smartrecruiters.com/docs/api-reference
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Jobs
-      - Hiring
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/api-reference
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/smartrecruiters/refs/heads/main/openapi/smartrecruiters-jobs-openapi.yml
-  - aid: smartrecruiters:candidate-api
-    name: SmartRecruiters Candidate API
-    description: >-
-      The Candidate API enables customers to import, export, read, and update candidate data. Supports full candidate
-      profile management, application tracking, and status updates.
-    humanURL: https://developers.smartrecruiters.com/docs/api-reference
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Candidates
-      - Applicants
-      - Talent
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/api-reference
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/smartrecruiters/refs/heads/main/openapi/smartrecruiters-candidates-openapi.yml
-  - aid: smartrecruiters:application-api
-    name: SmartRecruiters Application API
-    description: >-
-      The Application API enables integration of the full candidate application including screening questions, and
-      allows new applications to be submitted through partner systems and career sites.
-    humanURL: https://developers.smartrecruiters.com/docs/application-api-1
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Applications
-      - Candidates
-      - Screening
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/application-api-1
-  - aid: smartrecruiters:assessment-api
-    name: SmartRecruiters Assessment API
-    description: >-
-      The Assessment API allows customers to order assessment services available through the SmartRecruiters Marketplace
-      and allows partners to interface with the marketplace to provide and manage assessment services.
-    humanURL: https://developers.smartrecruiters.com/docs/partners-assessment-api
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Assessments
-      - Marketplace
-      - Partners
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/partners-assessment-api
-  - aid: smartrecruiters:interview-api
-    name: SmartRecruiters Interview API
-    description: >-
-      The Interview API provides self-scheduling capabilities and interview template management for streamlining the
-      interview process between recruiters and candidates.
-    humanURL: https://developers.smartrecruiters.com/docs/api-reference
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Interviews
-      - Scheduling
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/api-reference
-  - aid: smartrecruiters:reporting-api
-    name: SmartRecruiters Reporting API
-    description: >-
-      The Reporting API provides access to custom reports in CSV format, enabling analytics and data export capabilities
-      for HR metrics and recruiting performance.
-    humanURL: https://developers.smartrecruiters.com/docs/api-reference
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Reporting
-      - Analytics
-      - Data Export
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/api-reference
-  - aid: smartrecruiters:job-board-api
-    name: SmartRecruiters Job Board API
-    description: >-
-      The Job Board API enables job board partners to integrate SmartRecruiters job postings directly into their
-      platforms with real-time synchronization.
-    humanURL: https://developers.smartrecruiters.com/docs/partners-job-board-api
-    baseURL: https://api.smartrecruiters.com
-    tags:
-      - Job Boards
-      - Partners
-      - Jobs
-    properties:
-      - type: Documentation
-        url: https://developers.smartrecruiters.com/docs/partners-job-board-api
+- aid: smartrecruiters:application-api
+  name: SmartRecruiters Application API
+  description: >-
+    The Application API enables integration of the full candidate application including screening questions,
+    and allows new applications to be submitted through partner systems and career sites.
+  humanURL: https://developers.smartrecruiters.com/docs/application-api-1
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Applications
+  - Candidates
+  - Screening
+  properties:
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/application-api-1
+- aid: smartrecruiters:assessment-api
+  name: SmartRecruiters Assessment API
+  description: >-
+    The Assessment API allows customers to order assessment services available through the SmartRecruiters
+    Marketplace and allows partners to interface with the marketplace to provide and manage assessment
+    services.
+  humanURL: https://developers.smartrecruiters.com/docs/partners-assessment-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Assessments
+  - Marketplace
+  - Partners
+  properties:
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/partners-assessment-api
+- aid: smartrecruiters:interview-api
+  name: SmartRecruiters Interview API
+  description: >-
+    The Interview API provides self-scheduling capabilities and interview template management for streamlining
+    the interview process between recruiters and candidates.
+  humanURL: https://developers.smartrecruiters.com/docs/api-reference
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Interviews
+  - Scheduling
+  properties:
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:reporting-api
+  name: SmartRecruiters Reporting API
+  description: >-
+    The Reporting API provides access to custom reports in CSV format, enabling analytics and data export
+    capabilities for HR metrics and recruiting performance.
+  humanURL: https://developers.smartrecruiters.com/docs/api-reference
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Reporting
+  - Analytics
+  - Data Export
+  properties:
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:job-board-api
+  name: SmartRecruiters Job Board API
+  description: >-
+    The Job Board API enables job board partners to integrate SmartRecruiters job postings directly into
+    their platforms with real-time synchronization.
+  humanURL: https://developers.smartrecruiters.com/docs/partners-job-board-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Job Boards
+  - Partners
+  - Jobs
+  properties:
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/partners-job-board-api
+- aid: smartrecruiters:smartrecruiters-applications-api
+  name: SmartRecruiters Applications API
+  description: The Applications API from SmartRecruiters — 3 operation(s) for applications.
+  humanURL: https://developers.smartrecruiters.com/docs/posting-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/smartrecruiters-applications-api-openapi.yml
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/posting-api
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:smartrecruiters-candidates-api
+  name: SmartRecruiters Candidates API
+  description: The Candidates API from SmartRecruiters — 6 operation(s) for candidates.
+  humanURL: https://developers.smartrecruiters.com/docs/posting-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Candidates
+  properties:
+  - type: OpenAPI
+    url: openapi/smartrecruiters-candidates-api-openapi.yml
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/posting-api
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:smartrecruiters-documents-api
+  name: SmartRecruiters Documents API
+  description: The Documents API from SmartRecruiters — 1 operation(s) for documents.
+  humanURL: https://developers.smartrecruiters.com/docs/posting-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/smartrecruiters-documents-api-openapi.yml
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/posting-api
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:smartrecruiters-jobs-api
+  name: SmartRecruiters Jobs API
+  description: The Jobs API from SmartRecruiters — 5 operation(s) for jobs.
+  humanURL: https://developers.smartrecruiters.com/docs/posting-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/smartrecruiters-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/posting-api
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:smartrecruiters-messages-api
+  name: SmartRecruiters Messages API
+  description: The Messages API from SmartRecruiters — 1 operation(s) for messages.
+  humanURL: https://developers.smartrecruiters.com/docs/posting-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/smartrecruiters-messages-api-openapi.yml
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/posting-api
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:smartrecruiters-postings-api
+  name: SmartRecruiters Postings API
+  description: The Postings API from SmartRecruiters — 2 operation(s) for postings.
+  humanURL: https://developers.smartrecruiters.com/docs/posting-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Postings
+  properties:
+  - type: OpenAPI
+    url: openapi/smartrecruiters-postings-api-openapi.yml
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/posting-api
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
+- aid: smartrecruiters:smartrecruiters-teams-api
+  name: SmartRecruiters Teams API
+  description: The Teams API from SmartRecruiters — 1 operation(s) for teams.
+  humanURL: https://developers.smartrecruiters.com/docs/posting-api
+  baseURL: https://api.smartrecruiters.com
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/smartrecruiters-teams-api-openapi.yml
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/posting-api
+  - type: Documentation
+    url: https://developers.smartrecruiters.com/docs/api-reference
 common:
   - type: AgenticAccess
     url: agentic-access/smartrecruiters-agentic-access.yml
