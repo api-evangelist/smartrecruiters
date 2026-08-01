@@ -1,0 +1,26 @@
+{
+  "provider": "smartrecruiters",
+  "sources": [
+    "smartrecruiters-applications-api-openapi.yml",
+    "smartrecruiters-candidates-api-openapi.yml",
+    "smartrecruiters-documents-api-openapi.yml",
+    "smartrecruiters-jobs-api-openapi.yml",
+    "smartrecruiters-messages-api-openapi.yml",
+    "smartrecruiters-postings-api-openapi.yml",
+    "smartrecruiters-teams-api-openapi.yml"
+  ],
+  "outputs": [
+    "smartrecruiters-applications-api-openapi.yml",
+    "smartrecruiters-candidates-api-openapi.yml",
+    "smartrecruiters-documents-api-openapi.yml",
+    "smartrecruiters-jobs-api-openapi.yml",
+    "smartrecruiters-messages-api-openapi.yml",
+    "smartrecruiters-postings-api-openapi.yml",
+    "smartrecruiters-teams-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
