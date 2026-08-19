@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SmartRecruiters Candidate Applications Documents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SmartToken",
+      "value": "{{X-SmartToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Candidate Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/documents",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ]
+          },
+          "docs": "Returns all documents (resumes, CVs, cover letters) attached to a candidate profile."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

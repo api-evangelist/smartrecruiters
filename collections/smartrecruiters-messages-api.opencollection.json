@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SmartRecruiters Candidate Applications Messages API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SmartToken",
+      "value": "{{X-SmartToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Candidate Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/messages",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ]
+          },
+          "docs": "Returns all notes and messages associated with a candidate."
+        },
+        {
+          "info": {
+            "name": "Create Candidate Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/messages",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a note or message to a candidate profile."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

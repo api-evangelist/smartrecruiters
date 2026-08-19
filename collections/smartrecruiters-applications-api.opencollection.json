@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SmartRecruiters Candidate Applications API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SmartToken",
+      "value": "{{X-SmartToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Candidate Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/candidates/:candidateId/applications",
+            "params": [
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The unique candidate identifier"
+              }
+            ]
+          },
+          "docs": "Returns all job applications associated with a specific candidate."
+        },
+        {
+          "info": {
+            "name": "Submit Job Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartrecruiters.com/v1/companies/:companyIdentifier/postings/:postingId/candidates",
+            "params": [
+              {
+                "name": "companyIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The company identifier"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path",
+                "description": "The unique posting ID or UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new candidate application for a specific job posting. Supports submission of candidate profile, screening question answers, and resume/CV attachments."
+        },
+        {
+          "info": {
+            "name": "Get Application Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartrecruiters.com/v1/companies/:companyIdentifier/postings/:postingId/candidates/:candidateId/status",
+            "params": [
+              {
+                "name": "companyIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The company identifier"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path",
+                "description": "The unique posting ID or UUID"
+              },
+              {
+                "name": "candidateId",
+                "value": "",
+                "type": "path",
+                "description": "The candidate ID"
+              }
+            ]
+          },
+          "docs": "Retrieves the current application status of a specific candidate for a specific job posting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
