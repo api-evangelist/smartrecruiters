@@ -151,20 +151,6 @@ apis:
     url: https://developers.smartrecruiters.com/docs/posting-api
   - type: Documentation
     url: https://developers.smartrecruiters.com/docs/api-reference
-- aid: smartrecruiters:smartrecruiters-documents-api
-  name: SmartRecruiters Documents API
-  description: The Documents API from SmartRecruiters — 1 operation(s) for documents.
-  humanURL: https://developers.smartrecruiters.com/docs/posting-api
-  baseURL: https://api.smartrecruiters.com
-  tags:
-  - Documents
-  properties:
-  - type: OpenAPI
-    url: openapi/smartrecruiters-documents-api-openapi.yml
-  - type: Documentation
-    url: https://developers.smartrecruiters.com/docs/posting-api
-  - type: Documentation
-    url: https://developers.smartrecruiters.com/docs/api-reference
 - aid: smartrecruiters:smartrecruiters-jobs-api
   name: SmartRecruiters Jobs API
   description: The Jobs API from SmartRecruiters — 5 operation(s) for jobs.
@@ -177,22 +163,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/smartrecruiters-jobs-api-openapi.yml
-  - type: Documentation
-    url: https://developers.smartrecruiters.com/docs/posting-api
-  - type: Documentation
-    url: https://developers.smartrecruiters.com/docs/api-reference
-- aid: smartrecruiters:smartrecruiters-messages-api
-  name: SmartRecruiters Messages API
-  description: The Messages API from SmartRecruiters — 1 operation(s) for messages.
-  humanURL: https://developers.smartrecruiters.com/docs/posting-api
-  baseURL: https://api.smartrecruiters.com
-  tags:
-  - Message
-  tags_raw:
-  - Messages
-  properties:
-  - type: OpenAPI
-    url: openapi/smartrecruiters-messages-api-openapi.yml
   - type: Documentation
     url: https://developers.smartrecruiters.com/docs/posting-api
   - type: Documentation
