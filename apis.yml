@@ -70,6 +70,10 @@ apis:
   humanURL: https://developers.smartrecruiters.com/docs/partners-assessment-api
   baseURL: https://api.smartrecruiters.com
   tags:
+  - Assessment
+  - Marketplace
+  - Partners
+  tags_raw:
   - Assessments
   - Marketplace
   - Partners
@@ -111,7 +115,7 @@ apis:
   humanURL: https://developers.smartrecruiters.com/docs/partners-job-board-api
   baseURL: https://api.smartrecruiters.com
   tags:
-  - Job Boards
+  - Job Board
   - Partners
   - Job
   tags_raw:
