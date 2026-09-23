@@ -1,11 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SmartRecruiters Candidate Applications Candidates API
-  description: The SmartRecruiters Candidate API enables customers to import, export, read, and update candidate data. Provides full candidate profile management including personal information, application history, notes, and attachments.
+  title: Smartrecruiters Candidates API
   version: 1.0.0
   contact:
     name: SmartRecruiters Developer Support
     url: https://developers.smartrecruiters.com/
+  description: 'Operations tagged Candidates across 2 of this provider''s published API definitions: smartrecruiters-candidates-openapi.yml, smartrecruiters-jobs-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.smartrecruiters.com
   description: SmartRecruiters Production API
@@ -91,6 +91,9 @@ paths:
           description: Forbidden
         '409':
           description: Candidate with this email already exists
+    servers:
+    - url: https://api.smartrecruiters.com
+      description: SmartRecruiters Production API
   /candidates/{candidateId}:
     get:
       operationId: getCandidate
@@ -152,6 +155,9 @@ paths:
           description: Forbidden
         '404':
           description: Candidate not found
+    servers:
+    - url: https://api.smartrecruiters.com
+      description: SmartRecruiters Production API
   /candidates/{candidateId}/applications:
     get:
       operationId: listCandidateApplications
@@ -184,6 +190,9 @@ paths:
           description: Forbidden
         '404':
           description: Candidate not found
+    servers:
+    - url: https://api.smartrecruiters.com
+      description: SmartRecruiters Production API
   /candidates/{candidateId}/messages:
     get:
       operationId: listCandidateMessages
@@ -254,6 +263,9 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+    servers:
+    - url: https://api.smartrecruiters.com
+      description: SmartRecruiters Production API
   /candidates/{candidateId}/documents:
     get:
       operationId: listCandidateDocuments
@@ -286,6 +298,9 @@ paths:
           description: Forbidden
         '404':
           description: Candidate not found
+    servers:
+    - url: https://api.smartrecruiters.com
+      description: SmartRecruiters Production API
   /jobs/{jobId}/candidates:
     get:
       operationId: listJobCandidates
@@ -331,8 +346,34 @@ paths:
           description: Forbidden
         '404':
           description: Job not found
+    servers:
+    - url: https://api.smartrecruiters.com
+      description: SmartRecruiters Production API
 components:
   schemas:
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+          - NOTE
+          - EMAIL
+          - SYSTEM
+        createdOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
     CandidateUpdate:
       type: object
       properties:
@@ -372,57 +413,6 @@ components:
           type: string
         refId:
           type: string
-    CandidateCreate:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - email
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
-        location:
-          type: object
-          properties:
-            city:
-              type: string
-            country:
-              type: string
-        web:
-          type: object
-          properties:
-            linkedIn:
-              type: string
-              format: uri
-            portfolio:
-              type: string
-              format: uri
-        tags:
-          type: array
-          items:
-            type: string
-        sourceDetails:
-          $ref: '#/components/schemas/SourceDetails'
-    CandidateListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Candidate'
     Candidate:
       type: object
       properties:
@@ -491,6 +481,103 @@ components:
         updatedOn:
           type: string
           format: date-time
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        candidateId:
+          type: string
+        jobId:
+          type: string
+        jobTitle:
+          type: string
+        status:
+          type: string
+          enum:
+          - IN_PROGRESS
+          - REJECTED
+          - OFFERED
+          - HIRED
+        appliedOn:
+          type: string
+          format: date-time
+        updatedOn:
+          type: string
+          format: date-time
+        source:
+          $ref: '#/components/schemas/SourceDetails'
+    CandidateListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Candidate'
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - RESUME
+          - COVER_LETTER
+          - ATTACHMENT
+        contentType:
+          type: string
+        size:
+          type: integer
+        addedOn:
+          type: string
+          format: date-time
+    CandidateCreate:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - email
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+        location:
+          type: object
+          properties:
+            city:
+              type: string
+            country:
+              type: string
+        web:
+          type: object
+          properties:
+            linkedIn:
+              type: string
+              format: uri
+            portfolio:
+              type: string
+              format: uri
+        tags:
+          type: array
+          items:
+            type: string
+        sourceDetails:
+          $ref: '#/components/schemas/SourceDetails'
     CandidateListResult_2:
       type: object
       properties:
@@ -518,75 +605,6 @@ components:
               appliedOn:
                 type: string
                 format: date-time
-    Document:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - RESUME
-          - COVER_LETTER
-          - ATTACHMENT
-        contentType:
-          type: string
-        size:
-          type: integer
-        addedOn:
-          type: string
-          format: date-time
-    Message:
-      type: object
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-        type:
-          type: string
-          enum:
-          - NOTE
-          - EMAIL
-          - SYSTEM
-        createdOn:
-          type: string
-          format: date-time
-        createdBy:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-    Application:
-      type: object
-      properties:
-        id:
-          type: string
-        candidateId:
-          type: string
-        jobId:
-          type: string
-        jobTitle:
-          type: string
-        status:
-          type: string
-          enum:
-          - IN_PROGRESS
-          - REJECTED
-          - OFFERED
-          - HIRED
-        appliedOn:
-          type: string
-          format: date-time
-        updatedOn:
-          type: string
-          format: date-time
-        source:
-          $ref: '#/components/schemas/SourceDetails'
   securitySchemes:
     ApiKey:
       type: apiKey
@@ -600,3 +618,6 @@ components:
           scopes:
             candidates.read: Read candidate data
             candidates.write: Write candidate data
+x-refined-from:
+- smartrecruiters-candidates-openapi.yml
+- smartrecruiters-jobs-openapi.yml

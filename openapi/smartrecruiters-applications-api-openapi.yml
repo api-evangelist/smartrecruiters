@@ -1,11 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SmartRecruiters Candidate Applications API
-  description: The SmartRecruiters Candidate API enables customers to import, export, read, and update candidate data. Provides full candidate profile management including personal information, application history, notes, and attachments.
+  title: SmartRecruiters Posting Applications API
+  description: The SmartRecruiters Posting API enables customers to build fully customizable career sites by providing access to published job postings. Supports searching and filtering postings by keyword, location, department, language, and custom fields.
   version: 1.0.0
   contact:
     name: SmartRecruiters Developer Support
     url: https://developers.smartrecruiters.com/
+  termsOfService: https://www.smartrecruiters.com/legal/
 servers:
 - url: https://api.smartrecruiters.com
   description: SmartRecruiters Production API
@@ -14,38 +15,6 @@ security:
 tags:
 - name: Applications
 paths:
-  /candidates/{candidateId}/applications:
-    get:
-      operationId: listCandidateApplications
-      summary: List Candidate Applications
-      description: Returns all job applications associated with a specific candidate.
-      tags:
-      - Applications
-      parameters:
-      - name: candidateId
-        in: path
-        required: true
-        description: The unique candidate identifier
-        schema:
-          type: string
-      responses:
-        '200':
-          description: List of applications
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  content:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Application'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Candidate not found
   /v1/companies/{companyIdentifier}/postings/{postingId}/candidates:
     post:
       operationId: submitApplication
@@ -128,29 +97,6 @@ paths:
           description: Application not found
 components:
   schemas:
-    Answer:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Question ID
-        answer:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          - type: boolean
-    SourceDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The source type (e.g., DIRECT, REFERRAL, LINKEDIN)
-        subtype:
-          type: string
-        refId:
-          type: string
     Location:
       type: object
       properties:
@@ -170,6 +116,21 @@ components:
         remote:
           type: boolean
           description: Whether the position is remote
+    ApplicationResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Application ID
+        candidateId:
+          type: string
+          description: Candidate ID
+        postingId:
+          type: string
+          description: Posting ID
+        status:
+          type: string
+          description: Initial application status
     ApplicationSubmission:
       type: object
       required:
@@ -234,47 +195,19 @@ components:
               type: string
             label:
               type: string
-    ApplicationResult:
+    Answer:
       type: object
       properties:
         id:
           type: string
-          description: Application ID
-        candidateId:
-          type: string
-          description: Candidate ID
-        postingId:
-          type: string
-          description: Posting ID
-        status:
-          type: string
-          description: Initial application status
-    Application:
-      type: object
-      properties:
-        id:
-          type: string
-        candidateId:
-          type: string
-        jobId:
-          type: string
-        jobTitle:
-          type: string
-        status:
-          type: string
-          enum:
-          - IN_PROGRESS
-          - REJECTED
-          - OFFERED
-          - HIRED
-        appliedOn:
-          type: string
-          format: date-time
-        updatedOn:
-          type: string
-          format: date-time
-        source:
-          $ref: '#/components/schemas/SourceDetails'
+          description: Question ID
+        answer:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          - type: boolean
   securitySchemes:
     ApiKey:
       type: apiKey
@@ -283,8 +216,11 @@ components:
     OAuth2:
       type: oauth2
       flows:
-        clientCredentials:
+        authorizationCode:
+          authorizationUrl: https://www.smartrecruiters.com/identity/oauth/allow
           tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
           scopes:
             candidates.read: Read candidate data
             candidates.write: Write candidate data
+            jobs.read: Read job data
+            jobs.write: Write job data

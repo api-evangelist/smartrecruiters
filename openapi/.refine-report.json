@@ -1,26 +1,43 @@
 {
   "provider": "smartrecruiters",
   "sources": [
-    "smartrecruiters-applications-api-openapi.yml",
-    "smartrecruiters-candidates-api-openapi.yml",
-    "smartrecruiters-documents-api-openapi.yml",
-    "smartrecruiters-jobs-api-openapi.yml",
-    "smartrecruiters-messages-api-openapi.yml",
-    "smartrecruiters-postings-api-openapi.yml",
-    "smartrecruiters-teams-api-openapi.yml"
+    "_original/smartrecruiters-candidates-openapi.yml",
+    "_original/smartrecruiters-jobs-openapi.yml",
+    "_original/smartrecruiters-posting-openapi.yml"
   ],
   "outputs": [
-    "smartrecruiters-applications-api-openapi.yml",
     "smartrecruiters-candidates-api-openapi.yml",
-    "smartrecruiters-documents-api-openapi.yml",
     "smartrecruiters-jobs-api-openapi.yml",
-    "smartrecruiters-messages-api-openapi.yml",
-    "smartrecruiters-postings-api-openapi.yml",
-    "smartrecruiters-teams-api-openapi.yml"
+    "smartrecruiters-teams-api-openapi.yml",
+    "smartrecruiters-applications-api-openapi.yml",
+    "smartrecruiters-postings-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "smartrecruiters-candidates-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "smartrecruiters-candidates-openapi.yml: declared missing tag: Applications",
+    "smartrecruiters-candidates-openapi.yml: declared missing tag: Candidates",
+    "smartrecruiters-candidates-openapi.yml: declared missing tag: Documents",
+    "smartrecruiters-candidates-openapi.yml: declared missing tag: Messages",
+    "smartrecruiters-candidates-openapi.yml: multi-axis tagging (4 tags, 1 first tags, 1.50x duplication over 8 operations) \u2014 split on first tag, 4 operations narrowed",
+    "smartrecruiters-jobs-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "smartrecruiters-jobs-openapi.yml: declared missing tag: Candidates",
+    "smartrecruiters-jobs-openapi.yml: declared missing tag: Jobs",
+    "smartrecruiters-jobs-openapi.yml: declared missing tag: Teams",
+    "smartrecruiters-posting-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "smartrecruiters-posting-openapi.yml: declared missing tag: Applications",
+    "smartrecruiters-posting-openapi.yml: declared missing tag: Postings",
+    "tag 'Candidates' spans 2 source specs (smartrecruiters-candidates-openapi.yml, smartrecruiters-jobs-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "smartrecruiters-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "smartrecruiters-candidates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "smartrecruiters-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "smartrecruiters-postings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "smartrecruiters-teams-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

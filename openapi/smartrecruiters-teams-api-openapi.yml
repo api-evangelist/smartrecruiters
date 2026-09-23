@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SmartRecruiters Candidate Applications Teams API
-  description: The SmartRecruiters Candidate API enables customers to import, export, read, and update candidate data. Provides full candidate profile management including personal information, application history, notes, and attachments.
+  title: SmartRecruiters Job Teams API
+  description: The SmartRecruiters Job API enables customers to extract and import job data, supporting full job lifecycle management. Create, update, list, and manage jobs including their status, departments, hiring teams, and custom fields.
   version: 1.0.0
   contact:
     name: SmartRecruiters Developer Support
@@ -81,5 +81,5 @@ components:
         clientCredentials:
           tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
           scopes:
-            candidates.read: Read candidate data
-            candidates.write: Write candidate data
+            jobs.read: Read job data
+            jobs.write: Write job data

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SmartRecruiters Candidate Applications Jobs API
-  description: The SmartRecruiters Candidate API enables customers to import, export, read, and update candidate data. Provides full candidate profile management including personal information, application history, notes, and attachments.
+  title: SmartRecruiters Job Jobs API
+  description: The SmartRecruiters Job API enables customers to extract and import job data, supporting full job lifecycle management. Create, update, list, and manage jobs including their status, departments, hiring teams, and custom fields.
   version: 1.0.0
   contact:
     name: SmartRecruiters Developer Support
@@ -388,33 +388,6 @@ components:
                 $ref: '#/components/schemas/TeamMember'
         numberOfOpenings:
           type: integer
-    CandidateListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              firstName:
-                type: string
-              lastName:
-                type: string
-              email:
-                type: string
-              status:
-                type: string
-              appliedOn:
-                type: string
-                format: date-time
     JobCreate:
       type: object
       required:
@@ -474,6 +447,57 @@ components:
                   properties:
                     text:
                       type: string
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+    CandidateListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              status:
+                type: string
+              appliedOn:
+                type: string
+                format: date-time
+    JobUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        refNumber:
+          type: string
+        department:
+          type: object
+          properties:
+            id:
+              type: string
     JobListResult:
       type: object
       properties:
@@ -487,30 +511,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Job'
-    JobUpdate:
-      type: object
-      properties:
-        title:
-          type: string
-        refNumber:
-          type: string
-        department:
-          type: object
-          properties:
-            id:
-              type: string
-    TeamMember:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        role:
-          type: string
   securitySchemes:
     ApiKey:
       type: apiKey
@@ -522,5 +522,5 @@ components:
         clientCredentials:
           tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
           scopes:
-            candidates.read: Read candidate data
-            candidates.write: Write candidate data
+            jobs.read: Read job data
+            jobs.write: Write job data

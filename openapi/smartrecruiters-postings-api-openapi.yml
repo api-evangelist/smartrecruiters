@@ -1,11 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SmartRecruiters Candidate Applications Postings API
-  description: The SmartRecruiters Candidate API enables customers to import, export, read, and update candidate data. Provides full candidate profile management including personal information, application history, notes, and attachments.
+  title: SmartRecruiters Posting Postings API
+  description: The SmartRecruiters Posting API enables customers to build fully customizable career sites by providing access to published job postings. Supports searching and filtering postings by keyword, location, department, language, and custom fields.
   version: 1.0.0
   contact:
     name: SmartRecruiters Developer Support
     url: https://developers.smartrecruiters.com/
+  termsOfService: https://www.smartrecruiters.com/legal/
 servers:
 - url: https://api.smartrecruiters.com
   description: SmartRecruiters Production API
@@ -131,13 +132,6 @@ paths:
           description: Posting not found
 components:
   schemas:
-    EmploymentType:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
     Function:
       type: object
       properties:
@@ -164,6 +158,104 @@ components:
         remote:
           type: boolean
           description: Whether the position is remote
+    Posting:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique posting identifier
+        uuid:
+          type: string
+          description: Universal unique identifier for the posting
+        title:
+          type: string
+          description: Job title
+        department:
+          $ref: '#/components/schemas/Department'
+        location:
+          $ref: '#/components/schemas/Location'
+        releasedDate:
+          type: string
+          format: date-time
+          description: Date when the posting was released
+        applyUrl:
+          type: string
+          format: uri
+          description: URL to apply for the position
+        industry:
+          $ref: '#/components/schemas/Industry'
+        function:
+          $ref: '#/components/schemas/Function'
+        experienceLevel:
+          $ref: '#/components/schemas/ExperienceLevel'
+        employmentType:
+          $ref: '#/components/schemas/EmploymentType'
+        company:
+          $ref: '#/components/schemas/CompanySummary'
+    Industry:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+    CompanySummary:
+      type: object
+      properties:
+        identifier:
+          type: string
+        name:
+          type: string
+    PostingListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        offset:
+          type: integer
+          description: Number of results skipped
+        totalFound:
+          type: integer
+          description: Total number of matching postings
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Posting'
+    ExperienceLevel:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+    Question:
+      type: object
+      properties:
+        id:
+          type: string
+        required:
+          type: boolean
+        label:
+          type: string
+        type:
+          type: string
+          enum:
+          - TEXT
+          - SINGLE_SELECT
+          - MULTI_SELECT
+          - DATE
+          - NUMBER
+          - BOOLEAN
+        answerOptions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
     PostingDetails:
       allOf:
       - $ref: '#/components/schemas/Posting'
@@ -215,105 +307,14 @@ components:
           language:
             type: string
             description: Language of the posting
-    Question:
+    EmploymentType:
       type: object
       properties:
         id:
           type: string
-        required:
-          type: boolean
         label:
-          type: string
-        type:
-          type: string
-          enum:
-          - TEXT
-          - SINGLE_SELECT
-          - MULTI_SELECT
-          - DATE
-          - NUMBER
-          - BOOLEAN
-        answerOptions:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              label:
-                type: string
-    PostingListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: Maximum number of results returned
-        offset:
-          type: integer
-          description: Number of results skipped
-        totalFound:
-          type: integer
-          description: Total number of matching postings
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Posting'
-    CompanySummary:
-      type: object
-      properties:
-        identifier:
-          type: string
-        name:
           type: string
     Department:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-    ExperienceLevel:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-    Posting:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique posting identifier
-        uuid:
-          type: string
-          description: Universal unique identifier for the posting
-        title:
-          type: string
-          description: Job title
-        department:
-          $ref: '#/components/schemas/Department'
-        location:
-          $ref: '#/components/schemas/Location'
-        releasedDate:
-          type: string
-          format: date-time
-          description: Date when the posting was released
-        applyUrl:
-          type: string
-          format: uri
-          description: URL to apply for the position
-        industry:
-          $ref: '#/components/schemas/Industry'
-        function:
-          $ref: '#/components/schemas/Function'
-        experienceLevel:
-          $ref: '#/components/schemas/ExperienceLevel'
-        employmentType:
-          $ref: '#/components/schemas/EmploymentType'
-        company:
-          $ref: '#/components/schemas/CompanySummary'
-    Industry:
       type: object
       properties:
         id:
@@ -328,8 +329,11 @@ components:
     OAuth2:
       type: oauth2
       flows:
-        clientCredentials:
+        authorizationCode:
+          authorizationUrl: https://www.smartrecruiters.com/identity/oauth/allow
           tokenUrl: https://www.smartrecruiters.com/identity/oauth/token
           scopes:
             candidates.read: Read candidate data
             candidates.write: Write candidate data
+            jobs.read: Read job data
+            jobs.write: Write job data
