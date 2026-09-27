@@ -298,6 +298,57 @@ paths:
           description: Job not found
 components:
   schemas:
+    CandidateListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              status:
+                type: string
+              appliedOn:
+                type: string
+                format: date-time
+    JobUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        refNumber:
+          type: string
+        department:
+          type: object
+          properties:
+            id:
+              type: string
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
     Job:
       type: object
       properties:
@@ -388,6 +439,19 @@ components:
                 $ref: '#/components/schemas/TeamMember'
         numberOfOpenings:
           type: integer
+    JobListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
     JobCreate:
       type: object
       required:
@@ -447,70 +511,6 @@ components:
                   properties:
                     text:
                       type: string
-    TeamMember:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        role:
-          type: string
-    CandidateListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              firstName:
-                type: string
-              lastName:
-                type: string
-              email:
-                type: string
-              status:
-                type: string
-              appliedOn:
-                type: string
-                format: date-time
-    JobUpdate:
-      type: object
-      properties:
-        title:
-          type: string
-        refNumber:
-          type: string
-        department:
-          type: object
-          properties:
-            id:
-              type: string
-    JobListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
   securitySchemes:
     ApiKey:
       type: apiKey

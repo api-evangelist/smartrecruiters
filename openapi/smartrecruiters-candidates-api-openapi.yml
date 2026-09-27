@@ -351,29 +351,16 @@ paths:
       description: SmartRecruiters Production API
 components:
   schemas:
-    Message:
+    SourceDetails:
       type: object
       properties:
-        id:
-          type: string
-        message:
-          type: string
         type:
           type: string
-          enum:
-          - NOTE
-          - EMAIL
-          - SYSTEM
-        createdOn:
+          description: The source type (e.g., DIRECT, REFERRAL, LINKEDIN)
+        subtype:
           type: string
-          format: date-time
-        createdBy:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
+        refId:
+          type: string
     CandidateUpdate:
       type: object
       properties:
@@ -403,16 +390,80 @@ components:
           type: array
           items:
             type: string
-    SourceDetails:
+    CandidateCreate:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - email
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+        location:
+          type: object
+          properties:
+            city:
+              type: string
+            country:
+              type: string
+        web:
+          type: object
+          properties:
+            linkedIn:
+              type: string
+              format: uri
+            portfolio:
+              type: string
+              format: uri
+        tags:
+          type: array
+          items:
+            type: string
+        sourceDetails:
+          $ref: '#/components/schemas/SourceDetails'
+    CandidateListResult:
       type: object
       properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Candidate'
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
         type:
           type: string
-          description: The source type (e.g., DIRECT, REFERRAL, LINKEDIN)
-        subtype:
+          enum:
+          - NOTE
+          - EMAIL
+          - SYSTEM
+        createdOn:
           type: string
-        refId:
-          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
     Candidate:
       type: object
       properties:
@@ -481,6 +532,26 @@ components:
         updatedOn:
           type: string
           format: date-time
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - RESUME
+          - COVER_LETTER
+          - ATTACHMENT
+        contentType:
+          type: string
+        size:
+          type: integer
+        addedOn:
+          type: string
+          format: date-time
     Application:
       type: object
       properties:
@@ -506,77 +577,6 @@ components:
           type: string
           format: date-time
         source:
-          $ref: '#/components/schemas/SourceDetails'
-    CandidateListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Candidate'
-    Document:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - RESUME
-          - COVER_LETTER
-          - ATTACHMENT
-        contentType:
-          type: string
-        size:
-          type: integer
-        addedOn:
-          type: string
-          format: date-time
-    CandidateCreate:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - email
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
-        location:
-          type: object
-          properties:
-            city:
-              type: string
-            country:
-              type: string
-        web:
-          type: object
-          properties:
-            linkedIn:
-              type: string
-              format: uri
-            portfolio:
-              type: string
-              format: uri
-        tags:
-          type: array
-          items:
-            type: string
-        sourceDetails:
           $ref: '#/components/schemas/SourceDetails'
     CandidateListResult_2:
       type: object
