@@ -132,6 +132,96 @@ paths:
           description: Posting not found
 components:
   schemas:
+    EmploymentType:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+    Department:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+    Posting:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique posting identifier
+        uuid:
+          type: string
+          description: Universal unique identifier for the posting
+        title:
+          type: string
+          description: Job title
+        department:
+          $ref: '#/components/schemas/Department'
+        location:
+          $ref: '#/components/schemas/Location'
+        releasedDate:
+          type: string
+          format: date-time
+          description: Date when the posting was released
+        applyUrl:
+          type: string
+          format: uri
+          description: URL to apply for the position
+        industry:
+          $ref: '#/components/schemas/Industry'
+        function:
+          $ref: '#/components/schemas/Function'
+        experienceLevel:
+          $ref: '#/components/schemas/ExperienceLevel'
+        employmentType:
+          $ref: '#/components/schemas/EmploymentType'
+        company:
+          $ref: '#/components/schemas/CompanySummary'
+    Location:
+      type: object
+      properties:
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        countryCode:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        postalCode:
+          type: string
+        remote:
+          type: boolean
+          description: Whether the position is remote
+    PostingListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        offset:
+          type: integer
+          description: Number of results skipped
+        totalFound:
+          type: integer
+          description: Total number of matching postings
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Posting'
+    Industry:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
     PostingDetails:
       allOf:
       - $ref: '#/components/schemas/Posting'
@@ -183,6 +273,27 @@ components:
           language:
             type: string
             description: Language of the posting
+    Function:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+    CompanySummary:
+      type: object
+      properties:
+        identifier:
+          type: string
+        name:
+          type: string
+    ExperienceLevel:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
     Question:
       type: object
       properties:
@@ -210,117 +321,6 @@ components:
                 type: string
               label:
                 type: string
-    CompanySummary:
-      type: object
-      properties:
-        identifier:
-          type: string
-        name:
-          type: string
-    Industry:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-    Location:
-      type: object
-      properties:
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-        countryCode:
-          type: string
-        region:
-          type: string
-        city:
-          type: string
-        address:
-          type: string
-        postalCode:
-          type: string
-        remote:
-          type: boolean
-          description: Whether the position is remote
-    Department:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-    EmploymentType:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-    Posting:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique posting identifier
-        uuid:
-          type: string
-          description: Universal unique identifier for the posting
-        title:
-          type: string
-          description: Job title
-        department:
-          $ref: '#/components/schemas/Department'
-        location:
-          $ref: '#/components/schemas/Location'
-        releasedDate:
-          type: string
-          format: date-time
-          description: Date when the posting was released
-        applyUrl:
-          type: string
-          format: uri
-          description: URL to apply for the position
-        industry:
-          $ref: '#/components/schemas/Industry'
-        function:
-          $ref: '#/components/schemas/Function'
-        experienceLevel:
-          $ref: '#/components/schemas/ExperienceLevel'
-        employmentType:
-          $ref: '#/components/schemas/EmploymentType'
-        company:
-          $ref: '#/components/schemas/CompanySummary'
-    Function:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-    ExperienceLevel:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-    PostingListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: Maximum number of results returned
-        offset:
-          type: integer
-          description: Number of results skipped
-        totalFound:
-          type: integer
-          description: Total number of matching postings
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Posting'
   securitySchemes:
     ApiKey:
       type: apiKey

@@ -325,6 +325,19 @@ components:
               appliedOn:
                 type: string
                 format: date-time
+    JobListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
     JobUpdate:
       type: object
       properties:
@@ -439,19 +452,6 @@ components:
                 $ref: '#/components/schemas/TeamMember'
         numberOfOpenings:
           type: integer
-    JobListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
     JobCreate:
       type: object
       required:

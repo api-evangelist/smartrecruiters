@@ -97,25 +97,6 @@ paths:
           description: Application not found
 components:
   schemas:
-    Location:
-      type: object
-      properties:
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-        countryCode:
-          type: string
-        region:
-          type: string
-        city:
-          type: string
-        address:
-          type: string
-        postalCode:
-          type: string
-        remote:
-          type: boolean
-          description: Whether the position is remote
     Answer:
       type: object
       properties:
@@ -150,6 +131,40 @@ components:
               type: string
             label:
               type: string
+    ApplicationResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Application ID
+        candidateId:
+          type: string
+          description: Candidate ID
+        postingId:
+          type: string
+          description: Posting ID
+        status:
+          type: string
+          description: Initial application status
+    Location:
+      type: object
+      properties:
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        countryCode:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        postalCode:
+          type: string
+        remote:
+          type: boolean
+          description: Whether the position is remote
     ApplicationSubmission:
       type: object
       required:
@@ -193,21 +208,6 @@ components:
           description: Answers to screening questions
           items:
             $ref: '#/components/schemas/Answer'
-    ApplicationResult:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Application ID
-        candidateId:
-          type: string
-          description: Candidate ID
-        postingId:
-          type: string
-          description: Posting ID
-        status:
-          type: string
-          description: Initial application status
   securitySchemes:
     ApiKey:
       type: apiKey
