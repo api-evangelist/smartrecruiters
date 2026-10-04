@@ -351,6 +351,29 @@ paths:
       description: SmartRecruiters Production API
 components:
   schemas:
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+          - NOTE
+          - EMAIL
+          - SYSTEM
+        createdOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
     CandidateListResult:
       type: object
       properties:
@@ -390,6 +413,93 @@ components:
           format: date-time
         source:
           $ref: '#/components/schemas/SourceDetails'
+    CandidateCreate:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - email
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+        location:
+          type: object
+          properties:
+            city:
+              type: string
+            country:
+              type: string
+        web:
+          type: object
+          properties:
+            linkedIn:
+              type: string
+              format: uri
+            portfolio:
+              type: string
+              format: uri
+        tags:
+          type: array
+          items:
+            type: string
+        sourceDetails:
+          $ref: '#/components/schemas/SourceDetails'
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - RESUME
+          - COVER_LETTER
+          - ATTACHMENT
+        contentType:
+          type: string
+        size:
+          type: integer
+        addedOn:
+          type: string
+          format: date-time
+    CandidateUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        location:
+          type: object
+          properties:
+            city:
+              type: string
+            country:
+              type: string
+        web:
+          type: object
+          properties:
+            linkedIn:
+              type: string
+              format: uri
+            portfolio:
+              type: string
+              format: uri
+        tags:
+          type: array
+          items:
+            type: string
     Candidate:
       type: object
       properties:
@@ -468,116 +578,6 @@ components:
           type: string
         refId:
           type: string
-    CandidateCreate:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - email
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
-        location:
-          type: object
-          properties:
-            city:
-              type: string
-            country:
-              type: string
-        web:
-          type: object
-          properties:
-            linkedIn:
-              type: string
-              format: uri
-            portfolio:
-              type: string
-              format: uri
-        tags:
-          type: array
-          items:
-            type: string
-        sourceDetails:
-          $ref: '#/components/schemas/SourceDetails'
-    Message:
-      type: object
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-        type:
-          type: string
-          enum:
-          - NOTE
-          - EMAIL
-          - SYSTEM
-        createdOn:
-          type: string
-          format: date-time
-        createdBy:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-    CandidateUpdate:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        phoneNumber:
-          type: string
-        location:
-          type: object
-          properties:
-            city:
-              type: string
-            country:
-              type: string
-        web:
-          type: object
-          properties:
-            linkedIn:
-              type: string
-              format: uri
-            portfolio:
-              type: string
-              format: uri
-        tags:
-          type: array
-          items:
-            type: string
-    Document:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - RESUME
-          - COVER_LETTER
-          - ATTACHMENT
-        contentType:
-          type: string
-        size:
-          type: integer
-        addedOn:
-          type: string
-          format: date-time
     CandidateListResult_2:
       type: object
       properties:

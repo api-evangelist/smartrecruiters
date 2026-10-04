@@ -298,6 +298,19 @@ paths:
           description: Job not found
 components:
   schemas:
+    JobListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
     CandidateListResult:
       type: object
       properties:
@@ -325,31 +338,6 @@ components:
               appliedOn:
                 type: string
                 format: date-time
-    JobListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
-    JobUpdate:
-      type: object
-      properties:
-        title:
-          type: string
-        refNumber:
-          type: string
-        department:
-          type: object
-          properties:
-            id:
-              type: string
     TeamMember:
       type: object
       properties:
@@ -511,6 +499,18 @@ components:
                   properties:
                     text:
                       type: string
+    JobUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        refNumber:
+          type: string
+        department:
+          type: object
+          properties:
+            id:
+              type: string
   securitySchemes:
     ApiKey:
       type: apiKey

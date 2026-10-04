@@ -132,14 +132,14 @@ paths:
           description: Posting not found
 components:
   schemas:
-    EmploymentType:
+    CompanySummary:
       type: object
       properties:
-        id:
+        identifier:
           type: string
-        label:
+        name:
           type: string
-    Department:
+    Function:
       type: object
       properties:
         id:
@@ -180,41 +180,6 @@ components:
           $ref: '#/components/schemas/EmploymentType'
         company:
           $ref: '#/components/schemas/CompanySummary'
-    Location:
-      type: object
-      properties:
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-        countryCode:
-          type: string
-        region:
-          type: string
-        city:
-          type: string
-        address:
-          type: string
-        postalCode:
-          type: string
-        remote:
-          type: boolean
-          description: Whether the position is remote
-    PostingListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: Maximum number of results returned
-        offset:
-          type: integer
-          description: Number of results skipped
-        totalFound:
-          type: integer
-          description: Total number of matching postings
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Posting'
     Industry:
       type: object
       properties:
@@ -273,21 +238,49 @@ components:
           language:
             type: string
             description: Language of the posting
-    Function:
+    Location:
+      type: object
+      properties:
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        countryCode:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        postalCode:
+          type: string
+        remote:
+          type: boolean
+          description: Whether the position is remote
+    EmploymentType:
       type: object
       properties:
         id:
           type: string
         label:
           type: string
-    CompanySummary:
+    PostingListResult:
       type: object
       properties:
-        identifier:
-          type: string
-        name:
-          type: string
-    ExperienceLevel:
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        offset:
+          type: integer
+          description: Number of results skipped
+        totalFound:
+          type: integer
+          description: Total number of matching postings
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Posting'
+    Department:
       type: object
       properties:
         id:
@@ -321,6 +314,13 @@ components:
                 type: string
               label:
                 type: string
+    ExperienceLevel:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
   securitySchemes:
     ApiKey:
       type: apiKey

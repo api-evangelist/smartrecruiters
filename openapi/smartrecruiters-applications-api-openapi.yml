@@ -110,42 +110,6 @@ components:
             items:
               type: string
           - type: boolean
-    ApplicationStatus:
-      type: object
-      properties:
-        candidateId:
-          type: string
-        postingId:
-          type: string
-        status:
-          type: string
-          enum:
-          - IN_PROGRESS
-          - REJECTED
-          - OFFERED
-          - HIRED
-        reasonForRejection:
-          type: object
-          properties:
-            id:
-              type: string
-            label:
-              type: string
-    ApplicationResult:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Application ID
-        candidateId:
-          type: string
-          description: Candidate ID
-        postingId:
-          type: string
-          description: Posting ID
-        status:
-          type: string
-          description: Initial application status
     Location:
       type: object
       properties:
@@ -208,6 +172,42 @@ components:
           description: Answers to screening questions
           items:
             $ref: '#/components/schemas/Answer'
+    ApplicationStatus:
+      type: object
+      properties:
+        candidateId:
+          type: string
+        postingId:
+          type: string
+        status:
+          type: string
+          enum:
+          - IN_PROGRESS
+          - REJECTED
+          - OFFERED
+          - HIRED
+        reasonForRejection:
+          type: object
+          properties:
+            id:
+              type: string
+            label:
+              type: string
+    ApplicationResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Application ID
+        candidateId:
+          type: string
+          description: Candidate ID
+        postingId:
+          type: string
+          description: Posting ID
+        status:
+          type: string
+          description: Initial application status
   securitySchemes:
     ApiKey:
       type: apiKey
