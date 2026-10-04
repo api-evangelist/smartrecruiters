@@ -1,0 +1,62 @@
+slug: smartrecruiters
+provider: SmartRecruiters
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Candidates
+  spec_file: smartrecruiters-candidates-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.92
+  evidence: POST /candidates  createCandidate  Create Candidate ... GET /jobs/{jobId}/candidates  listJobCandidates
+  reason: Candidate records, their applications, messages and documents are the applicant-tracking surface
+    of recruiting — Talent Acquisition Management.
+- tag: Applications
+  spec_file: smartrecruiters-applications-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: POST /v1/companies/{companyIdentifier}/postings/{postingId}/candidates  submitApplication  Submit
+    Job Application
+  reason: Submitting and tracking job applications against published postings is core recruiting/hiring
+    activity under Talent Acquisition Management.
+- tag: Jobs
+  spec_file: smartrecruiters-jobs-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.88
+  evidence: '"supporting full job lifecycle management. Create, update, list, and manage jobs including
+    their status, departments, hiring teams"'
+  reason: Jobs here are hiring requisitions with hiring teams and candidates, i.e. recruiting rather than
+    product or project work.
+- tag: Postings
+  spec_file: smartrecruiters-postings-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.88
+  evidence: GET /v1/companies/{companyIdentifier}/postings  listPostings  List Job Postings
+  reason: Published job postings for career sites are the sourcing/advertising step of Talent Acquisition
+    Management.
+- tag: Teams
+  spec_file: smartrecruiters-teams-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.72
+  evidence: GET /jobs/{jobId}/hiring-team  getJobHiringTeam  Get Job Hiring Team
+  reason: Single operation returning the hiring team for a requisition; clearly recruiting-related though
+    thin, so sub-capability inferred from the hiring context.

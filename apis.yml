@@ -202,6 +202,9 @@ apis:
   - type: Documentation
     url: https://developers.smartrecruiters.com/docs/api-reference
 common:
+  - type: CapabilityMap
+    url: capabilities/smartrecruiters-capability-edges.yml
+    name: SmartRecruiters Business Capability Map
   - type: AgenticAccess
     url: agentic-access/smartrecruiters-agentic-access.yml
   - type: TrustCenter
