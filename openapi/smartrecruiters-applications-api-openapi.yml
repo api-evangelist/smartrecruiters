@@ -97,19 +97,6 @@ paths:
           description: Application not found
 components:
   schemas:
-    Answer:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Question ID
-        answer:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          - type: boolean
     Location:
       type: object
       properties:
@@ -129,6 +116,42 @@ components:
         remote:
           type: boolean
           description: Whether the position is remote
+    ApplicationStatus:
+      type: object
+      properties:
+        candidateId:
+          type: string
+        postingId:
+          type: string
+        status:
+          type: string
+          enum:
+          - IN_PROGRESS
+          - REJECTED
+          - OFFERED
+          - HIRED
+        reasonForRejection:
+          type: object
+          properties:
+            id:
+              type: string
+            label:
+              type: string
+    ApplicationResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Application ID
+        candidateId:
+          type: string
+          description: Candidate ID
+        postingId:
+          type: string
+          description: Posting ID
+        status:
+          type: string
+          description: Initial application status
     ApplicationSubmission:
       type: object
       required:
@@ -172,42 +195,19 @@ components:
           description: Answers to screening questions
           items:
             $ref: '#/components/schemas/Answer'
-    ApplicationStatus:
-      type: object
-      properties:
-        candidateId:
-          type: string
-        postingId:
-          type: string
-        status:
-          type: string
-          enum:
-          - IN_PROGRESS
-          - REJECTED
-          - OFFERED
-          - HIRED
-        reasonForRejection:
-          type: object
-          properties:
-            id:
-              type: string
-            label:
-              type: string
-    ApplicationResult:
+    Answer:
       type: object
       properties:
         id:
           type: string
-          description: Application ID
-        candidateId:
-          type: string
-          description: Candidate ID
-        postingId:
-          type: string
-          description: Posting ID
-        status:
-          type: string
-          description: Initial application status
+          description: Question ID
+        answer:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          - type: boolean
   securitySchemes:
     ApiKey:
       type: apiKey

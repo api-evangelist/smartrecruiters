@@ -298,58 +298,6 @@ paths:
           description: Job not found
 components:
   schemas:
-    JobListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
-    CandidateListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              firstName:
-                type: string
-              lastName:
-                type: string
-              email:
-                type: string
-              status:
-                type: string
-              appliedOn:
-                type: string
-                format: date-time
-    TeamMember:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        role:
-          type: string
     Job:
       type: object
       properties:
@@ -499,6 +447,58 @@ components:
                   properties:
                     text:
                       type: string
+    CandidateListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              status:
+                type: string
+              appliedOn:
+                type: string
+                format: date-time
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+    JobListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
     JobUpdate:
       type: object
       properties:

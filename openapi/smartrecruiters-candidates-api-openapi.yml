@@ -351,68 +351,16 @@ paths:
       description: SmartRecruiters Production API
 components:
   schemas:
-    Message:
+    SourceDetails:
       type: object
       properties:
-        id:
-          type: string
-        message:
-          type: string
         type:
           type: string
-          enum:
-          - NOTE
-          - EMAIL
-          - SYSTEM
-        createdOn:
+          description: The source type (e.g., DIRECT, REFERRAL, LINKEDIN)
+        subtype:
           type: string
-          format: date-time
-        createdBy:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-    CandidateListResult:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        totalFound:
-          type: integer
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Candidate'
-    Application:
-      type: object
-      properties:
-        id:
+        refId:
           type: string
-        candidateId:
-          type: string
-        jobId:
-          type: string
-        jobTitle:
-          type: string
-        status:
-          type: string
-          enum:
-          - IN_PROGRESS
-          - REJECTED
-          - OFFERED
-          - HIRED
-        appliedOn:
-          type: string
-          format: date-time
-        updatedOn:
-          type: string
-          format: date-time
-        source:
-          $ref: '#/components/schemas/SourceDetails'
     CandidateCreate:
       type: object
       required:
@@ -451,26 +399,32 @@ components:
             type: string
         sourceDetails:
           $ref: '#/components/schemas/SourceDetails'
-    Document:
+    Application:
       type: object
       properties:
         id:
           type: string
-        name:
+        candidateId:
           type: string
-        type:
+        jobId:
+          type: string
+        jobTitle:
+          type: string
+        status:
           type: string
           enum:
-          - RESUME
-          - COVER_LETTER
-          - ATTACHMENT
-        contentType:
-          type: string
-        size:
-          type: integer
-        addedOn:
+          - IN_PROGRESS
+          - REJECTED
+          - OFFERED
+          - HIRED
+        appliedOn:
           type: string
           format: date-time
+        updatedOn:
+          type: string
+          format: date-time
+        source:
+          $ref: '#/components/schemas/SourceDetails'
     CandidateUpdate:
       type: object
       properties:
@@ -568,16 +522,62 @@ components:
         updatedOn:
           type: string
           format: date-time
-    SourceDetails:
+    Document:
       type: object
       properties:
+        id:
+          type: string
+        name:
+          type: string
         type:
           type: string
-          description: The source type (e.g., DIRECT, REFERRAL, LINKEDIN)
-        subtype:
+          enum:
+          - RESUME
+          - COVER_LETTER
+          - ATTACHMENT
+        contentType:
           type: string
-        refId:
+        size:
+          type: integer
+        addedOn:
           type: string
+          format: date-time
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+          - NOTE
+          - EMAIL
+          - SYSTEM
+        createdOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+    CandidateListResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        totalFound:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Candidate'
     CandidateListResult_2:
       type: object
       properties:
