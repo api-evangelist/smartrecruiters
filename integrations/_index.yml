@@ -40,7 +40,7 @@
     - connectors/applications/smartrecruiters
     vendor_link: https://www.smartrecruiters.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: smartrecruiters-microsoft-teams-own
   label: Microsoft Teams (own)
